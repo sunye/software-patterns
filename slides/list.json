@@ -1,0 +1,9 @@
+[
+	"index.md", 
+	"decorator.md", 
+	"strategy.md",
+	"composite.md",
+	"command.md",
+	"facade.md",
+	"proxy.md"
+]
