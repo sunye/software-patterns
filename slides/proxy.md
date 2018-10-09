@@ -68,3 +68,13 @@
 ## Author and Date
 
 - Design Patterns: Elements of Reusable Object-Oriented Software. Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994.
+
+----
+
+## More Examples
+
+----
+
+## Java RMI 
+
+![](resources/png/rmi.png)
