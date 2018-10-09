@@ -9,6 +9,30 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 In
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc/4.0/)
 
 ----
+## Contents
+
+- **Design Patterns**
+  - Decorator
+  - Strategy
+  - Composite
+  - Command
+  - Façade
+  - Proxy
+
+- Concurrency Patterns
+   - Reactor
+   - Message Queueing
+   
+
+- **Architectural Patterns**
+  - Broker
+  - Layers
+  - Pipes and Filters
+
+- Reliability Patterns
+  - Watchdog
+
+----
 
 ## References (1/3)
 
@@ -32,6 +56,12 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 In
 
 - «Introduction to Patterns and Frameworks.» Dr. David L. Levine and Douglas C. Schmidt. Department of Computer Science Washington University, St. Louis.
 - «Head First Design Patterns: A Brain-Friendly Guide». Bert Bates, Kathy Sierra, Eric Freeman, Elisabeth Robson. O'Reilly Media, June 2009.
+
+----
+## References
+
+- «Patterns Oriented Software Architecture: A System of Patterns». Frank Bushmann, Regine Meunier, Hans Rohnert, Peter Sommerlad, Michael Stahl. John Wiley & Sons, 1996.
+- «Real-Time Design Patterns : Robust Scalable Architecture for Real-Time Systems». Bruce Powel Douglass. Addison Wesley, September 2002.
 
 ----
 
