@@ -1,5 +1,5 @@
 
-# Software Patterns
+# Software Patterns Catalog
 
 ----
 
