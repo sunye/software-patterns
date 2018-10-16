@@ -12,5 +12,6 @@
     "pipes-filters.md",
     "watchdog.md",
     "reactor.md",
-    "message-queueing.md"
+    "message-queueing.md",
+    "dto.md"
 ]
