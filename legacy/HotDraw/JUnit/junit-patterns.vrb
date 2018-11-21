@@ -1,0 +1,16 @@
+\frametitle{Création dynamique d'une suite de tests}
+%\vspace{1cm}
+Extraction dynamique des méthodes de test et création d'une suite qui
+les contient:
+\begin{itemize}
+    \item  Par convention, les méthodes commençant par "test" et ne
+    contenant pas de paramètres.
+
+    \item  Construction des objets de tests utilisant la réflexion.
+\end{itemize}
+
+\begin{lstlisting}[frame=tb]
+public static Test suite() {
+  return new TestSuite(MoneyTest.class);}
+\end{lstlisting}
+

@@ -1,0 +1,467 @@
+\documentclass{beamer}
+\usetheme{Berlin}
+%\usetheme{CambridgeUS} 
+\usepackage[latin1]{inputenc}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{pdfsync}
+\usepackage{graphics}
+\usepackage{xcolor}
+\usepackage[french]{babel}
+\NoAutoSpaceBeforeFDP
+
+\lstset{language=Java,
+        tabsize=3,
+        basicstyle=\color{blue}\small,
+        keywordstyle=\bfseries,
+        ndkeywordstyle=\bfseries,
+        commentstyle=\itshape,
+        morecomment=[l][itshape]{//},
+        stringstyle=\ttfamily,
+        showstringspaces=false,
+        flexiblecolumns,
+  commentstyle=\color{red},
+}
+
+\newcommand{\code}[1]{\lstinline!#1!}
+
+\title{JUnit}
+\subtitle{Le cadre d'applications JUnit en quelques patrons de conception}
+\author[G. Sunyé]{Gerson Suny\'e \\ gerson.sunye@univ-nantes.fr}
+\institute[U. Nantes \hspace{2em} \insertframenumber/ \inserttotalframenumber]{LS2N \--- Université de Nantes}
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% \begin{frame}{Plan}
+% \tableofcontents[hidesubsections]
+% \end{frame}
+
+
+
+%\begin{frame} {Le cadre d'applications}
+ %   %\vspace{1cm}
+%    Présentation de la conception et de l'implémentation de JUnit.
+%\end{frame}
+
+
+\subsection{Cas de test}
+
+\begin{frame}[fragile]
+\frametitle{TestCase implémente «Command»}
+%%\vspace{1cm}
+\begin{center}
+  \includegraphics[width=4cm]{testcase-command}
+\end{center}
+  \begin{lstlisting}[frame=tb]
+public abstract class TestCase implements Test {
+  public abstract void run(); 
+} 
+\end{lstlisting}
+
+\only<1>{
+Avantages:
+\begin{itemize}
+  \item Le concept de base est représenté par un objet (\code{TestCase}).
+  \item Il est plus simple de créer des tests qui gardent leur résultat.
+  \item Simplification de l'écriture de tests.
+\end{itemize}}
+\only<2>{
+\begin{verse}
+Le patron Commande encapsule un message en un objet et permet que les messages 
+soient mis en enfilade ou enregistrés.
+\end{verse}
+\begin{itemize}
+ \item Il créé un objet par opération et 
+  \item implémente la méthode \code{/execute()} pour chaque objet.
+\end{itemize}}
+
+\end{frame}
+
+
+
+\begin{frame}{TestCase.run() implémente «Template Method»}
+%%\vspace{1cm}
+\begin{center}
+\includegraphics[width=4cm]{testcase-template}
+\end{center}
+Avantages:
+
+\begin{itemize}
+  \item Fournit un lieu unique pour implémenter la partie fixe et la 
+partie variable des tests.
+  \item Fournit une structure commune à tous les tests:
+  \begin{itemize}
+    \item Initialisation.
+    \item Exécution des tests.
+    \item Vérification des résultats.
+    \item Nettoyage.
+  \end{itemize}
+\end{itemize} 
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Le patron «Template Method»}
+%\vspace{0.3cm}
+\begin{verse}
+    Une méthode Template définit le squelette d'un algorithme en 
+laissant quelques étapes aux sous-classes.
+Elle laisse les sous-classes redéfinir certaines étapes d'un algorithme 
+sans changer sa structure.
+
+\end{verse}
+
+\begin{lstlisting}[frame=tb]
+public void run() {
+  setUp();
+  runTest();
+  tearDown();
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Les crochets}
+%\vspace{0.3cm}
+Le comportement par défaut de ces méthodes est nul:
+\begin{lstlisting}[frame=tb]
+protected void runTest() { } 
+protected void setUp() { } 
+protected void tearDown() { }
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame} {Echecs et erreurs (1/3)}
+%\vspace{0.2cm}
+\begin{itemize}
+  \item Échec
+  \begin{itemize}
+    \item Anticipe et vérifie les assertions (assert).
+    \item Signalé par une erreur \emph{AssertionFailedError}
+  \end{itemize}
+  \item Erreur
+  \begin{itemize}
+    \item Problèmes non anticipés, comme 
+\emph{ArrayIndexOutOfBoundsException}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Echec et erreurs (2/3)}
+%\vspace{1cm}
+\begin{lstlisting}[frame=tb]
+public void run(TestResult result) { 
+  result.startTest(this); 
+  setUp(); 
+  try {
+    runTest();
+  } catch (AssertionFailedError e) {
+    result.addFailure(this, e);
+  } catch (Throwable e) {
+    result.addError(this, e);
+  } finally {
+    tearDown();
+  } 
+} 
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame} {Collecte de résultats}
+%\vspace{1cm}
+\begin{itemize}
+  \item Après l'exécution d'un test, on a besoin d'un résumé de ce 
+    qui a et ce qui n'a pas marché.
+  \item La forme canonique de la collecte de paramètres demande qu'un 
+  paramètre de collecte soit passé à chaque méthode.
+  \begin{itemize}
+    \item Chaque méthode de test demanderait un paramètre pour la 
+    classe \code{TestResult}.
+    \item Une \emph{pollution} de signatures de ces méthodes. 
+    \item Il est possible d'utiliser le mécanisme d'exceptions pour 
+    éviter cette poluttion. 
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame} {Le patron «Collecting Parameter»}
+%%\vspace{1cm}
+\begin{center}
+\includegraphics[width=6cm]{testresult-collecting}
+\end{center}
+Patron «Collecting Parameter»
+\begin{itemize}
+    \item Quand on a besoin de collecter les résultats de plusieurs 
+    méthodes, on peut ajouter un paramètre à la méthode et lui passer un 
+    objet qui collecte les résultats.
+    \item \code{TestResult} : résultats des tests.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame} {TestCase implémente «Adapter»}
+%\vspace{1cm}
+    \code{TestCase} implémente le patron «Adapter» en utilisant des classes
+    anonymes.
+    \begin{center}
+    \includegraphics[width=6cm]{testcase-pluggable}
+    \end{center}
+\end{frame}
+
+\begin{frame} {Un cas de test == une méthode }
+%%\vspace{1cm}  
+\begin{itemize}
+    \item   Pour éviter une prolifération inutile de classes
+    \begin{itemize}
+        \item  Les tests sont implémentés comme des différentes méthodes dans la 
+    même classe.
+    
+        \item  Une classe de test peut implémenter différentes 
+    méthodes, chacune définissant un cas de test.
+    
+        \item  Chaque cas de test a un nom descriptif, comme \code{testMoneyEquals()} 
+    ou \code{testMoneyAdd()}.
+    \end{itemize}
+        \end{itemize}
+\end{frame}
+
+\begin{frame} {Les méthodes de test}
+%\vspace{1cm} 
+\begin{itemize}    
+    \item  Les cas de test ne se conforment pas à une interface 
+    unique du patron commande.
+    \begin{itemize}
+        \item  Les différentes instances de la même classe \emph{Commande} 
+        doivent être appelées par des méthodes différentes.
+    \end{itemize}
+
+    \item  Le problème est de faire que tous les cas de test 
+    paraîssent similaires, du point de vue des clients.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame} {Le patron «Adapter»}
+%\vspace{1cm}
+\begin{verse}
+    L'adaptateur convertit l'interface d'une classe en une interface 
+    attendue par les classes clientes. 
+\end{verse}
+   
+%\vspace{0.2cm}
+La classe \code{TestCase}, utilise la spécification (i.e. héritage) pour adapter 
+l'interface et implémente une sous-classe pour chaque cas de test.
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Adaptation par spécification}
+%%\vspace{1cm}
+
+\begin{lstlisting}[frame=tb]
+// sous-classe explicite
+public class TestMoneyEquals extends MoneyTest { 
+    public TestMoneyEquals() {      
+      super("testMoneyEquals"); }
+    protected void runTest () { testMoneyEquals(); }}
+    
+//classe anonyme
+  TestCase test= new MoneyTest("testMoneyEquals ") {
+    protected void runTest() { testMoneyEquals(); }};
+\end{lstlisting}{}
+\end{frame}
+
+
+\begin{frame} {TestCase implémente «Pluggable Selector»}
+\vspace{0.2cm}
+    Un PluggableSelector utilise une seule classe, qui peut être 
+    personnalisée pour exécuter des logiques différentes, sans 
+    la création de sous classes.    
+\begin{itemize}
+    \item  Il stocke un sélecteur de méthodes 
+    dans une variable d'instance. 
+
+    \item  Le mécanisme de réflexion de Java permet l'appel d'une 
+    méthode à partir d'une chaîne contenant son nom.
+
+    \item  Le Pluggable Selector est l'implémentation de la méthode 
+    \code{runTest()}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{«Pluggable Selector»}
+%%\vspace{1cm}
+\begin{lstlisting}[frame=tb]
+protected void runTest() throws Throwable {
+  Method runMethod= null;
+  try {
+    runMethod= getClass().getMethod(fName, new Class[0]); 
+  } catch (NoSuchMethodException e) {
+    assert("Method \""+fName+"\" not found", false); 
+    }
+  try {
+    runMethod.invoke(this, new Class[0]);
+  } catch (InvocationTargetException and IllegalAccessException) {}
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Suite de test}
+
+
+\begin{frame} {TestSuite implémente «Composite» }
+%%\vspace{1cm}
+\only<1>{
+\begin{itemize}
+  \item Pour être certain de l'état du système, il faut exécuter 
+plusieurs tests.
+  \item Il faut implémenter des suites de cas de tests.
+\end{itemize}}
+\begin{center}
+\includegraphics[width=8cm]{test-composite}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Le patron «Composite»}
+%\framesubtitle{}
+
+\begin{verse}
+    Le composite permet que les clients traitent des objets simples et 
+    composés de manière uniforme.    
+\end{verse}
+\begin{center}
+\includegraphics[width=8cm]{test-composite}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame} {Composants, composites et feuilles}
+%\vspace{1cm}
+Participants:
+\begin{description}
+    \item [Composant]: déclare l'interface qui sera utilisée pour 
+    interagir avec les tests: \code{Test}.
+
+    \item [Composite]: implémente cette interface et stocke une 
+    collection de tests: \code{TestSuite}.
+
+    \item [Feuille]: représente un cas de test, dans une composition 
+    conforme à l'interface Composant: \code{TestCase}.
+\end{description}
+
+\end{frame}
+
+\begin{frame}[fragile] 
+\frametitle{Composant}
+\begin{itemize}
+    \item  Composant: déclare l'interface qui sera utilisée pour 
+    interagir avec les tests: \code{public interface Test {public abstract void run(TestResult result);}}
+\end{itemize}
+\begin{center}
+\includegraphics[width=8cm]{test-composite}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Composite}
+\begin{itemize}
+    \item  Composite: implémente cette interface et stocke une 
+    collection de tests.
+\end{itemize}
+\begin{center}
+\includegraphics[width=8cm]{test-composite}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile] 
+\frametitle{Composite}
+\begin{lstlisting}[frame=tb]
+public class TestSuite implements Test {
+  private Vector fTests= new Vector(); //children
+  
+  // delegate to children
+  public void run(TestResult result) {
+    for (Enumeration e= fTests.elements(); e.hasMoreElements(); ){
+      Test test= (Test)e.nextElement();
+      test.run(result); }}
+      
+  // add test to a test suite
+    public void addTest(Test test) {
+      fTests.addElement(test);}}
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame} {Feuille}
+%%\vspace{1cm}
+\begin{itemize}
+    \item  Feuille: représente un cas de test, dans une composition 
+    conforme à l'interface Composant.
+\end{itemize}
+\begin{center}
+\includegraphics[width=8cm]{test-composite}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Feuille}
+\begin{lstlisting}[frame=tb]
+public abstract class TestCase implements Test {
+  public abstract void run();
+} 
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Création statique d'une suite de tests}
+%\vspace{1cm}
+Spécification d'une suite de tests:
+
+\begin{lstlisting}[frame=tb]
+public static Test suite() {
+  TestSuite suite= new TestSuite();
+  suite.addTest(new MoneyTest("testMoneyEquals"));
+  suite.addTest(new MoneyTest("testSimpleAdd"));}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Création dynamique d'une suite de tests}
+%\vspace{1cm}
+Extraction dynamique des méthodes de test et création d'une suite qui 
+les contient:
+\begin{itemize}
+    \item  Par convention, les méthodes commençant par "test" et ne 
+    contenant pas de paramètres.
+
+    \item  Construction des objets de tests utilisant la réflexion.
+\end{itemize}
+
+\begin{lstlisting}[frame=tb]
+public static Test suite() {
+  return new TestSuite(MoneyTest.class);}
+\end{lstlisting}
+
+\end{frame}
+
+% ----------------------------------------------------------------
+% 
+\end{document}
+
