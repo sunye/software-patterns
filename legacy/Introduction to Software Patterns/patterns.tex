@@ -1,0 +1,960 @@
+\documentclass{beamer}
+\usetheme{Berlin}
+\usepackage[latin1]{inputenc}
+\usepackage{listings}
+%\usepackage{hyperref}
+\usepackage{graphics}
+
+\title{Introduction aux Patrons Logiciels}
+\subtitle{Software Patterns}
+\institute[\href{http://alma.univ-nantes.fr}{Master Alma \--- U. Nantes} \hspace{1em} \insertframenumber/ \inserttotalframenumber]{Master Alma \--- Université de Nantes}
+\author[G. Sunyé]{Gerson Suny\'e \\ 
+	\texttt{gerson.sunye@univ-nantes.fr}}
+
+
+\begin{document} 
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\frame{\tableofcontents[hideothersubsections]}
+%----------------------------------------------------------------------------- Intro
+\section{Introduction}
+\frame{\tableofcontents[currentsection,hideothersubsections]}
+
+\begin{frame}{Bibliographie (1/2)}
+
+\begin{itemize}
+\item \emph{Software Patterns}. James Coplien. SIGS Books. New York, 1996.
+\item \emph{Smalltalk Patterns: Best Practices}. Kent Beck. Prentice Hall, 1997, 256 pp., ISBN 0-13-476904-X.
+\item \emph{Design Patterns: Elements of Reusable Object-Oriented Software}. Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994. 
+\item \emph{Real-Time Design Patterns}. Bruce Powel Douglass. Addison Wesley. 2003.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Bibliographie (2/2)}
+\begin{itemize}
+\item \emph{Pattern Languages of Program Design}.
+\begin{enumerate}
+\item Coplien \& Schmidt
+\item Vlissides, Coplien, \& Kerth
+\item Martin, Riehle, Buschmann
+\item Harrison, Foote, Rohnert
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Liens}
+\begin{itemize}
+\item Patterns Home Page: http://hillside.net/patterns/
+\item Portland Pattern Repository: http://c2.com/ppr/index.html
+\item Cetus Links: http://www.objenv.com/cetus/oo\_patterns.html
+\item Patterns FAQ: http://g.oswego.edu/dl/pd-FAQ/pd-FAQ.html
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Motivation}
+\begin{itemize}
+\item Réutilisation.
+\item Passage de connaissances.
+\item Communication entre développeurs.
+\item Documentation.
+\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------- Historique
+\begin{frame}{Historique (1/5)}
+\begin{itemize}
+\item Christopher Alexander:
+\begin{enumerate}
+\item \emph{Notes on the Synthesis of Form}, Harvard University Press, 1964.
+\item \emph{The Oregon Experiment}, Oxford University Press, 1975.
+\item \emph{A Pattern Language: Towns, Buildings}, Construction, Oxford University Press, 1977.
+\item \emph{The Timeless Way of Building}, Oxford University Press, 1979.
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+%The current use of the term "pattern" is derived from the writings of the architect Christopher Alexander 
+% who has written several books on the topic as it relates to urban planning and building architecture:
+
+%Although these books are ostensibly about architecture and urban planning, they are applicable to 
+% many other disciplines, including software development. In [Notes], Alexander argues that current 
+%architectural methods result in products that fail to meet the real demands and requirements of its users, 
+%society and its individuals, and are unsuccessful in fulfilling the quintessential purpose of all design 
+%and engineering endeavors: to improve the human condition. Alexander wanted to create structures that 
+%are good for people and have a positive influence on them by improving their comfort and their quality of life. 
+%He concluded that architects must constantly strive to produce work products that better fit and adapt to the 
+%needs of all their inhabitants and users and their respective communities. In [APL] Alexander describes 
+%some "timeless" design ideas to try and realize these goals.
+
+\begin{frame}{Historique (2/5)}
+\begin{itemize}
+\item Dans [TTWoB] Alexander propose un paradigme pour l'architecture, basé sur trois concepts:
+\begin{enumerate}
+\item The Quality (a.k.a. ``the Quality Without a Name'').
+\item The Gate.
+\item The Way (a.k.a. ``the Timeless Way'').
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+%The quality: This is the essence of all things living and useful that imparts unto them qualities such as: freedom, 
+%wholeness, completeness, comfort, harmony, habitability, durability, openness, resilience, variability, and adaptability. 
+%It is what makes us feel "alive" and "sated", gives us satisfaction, and ultimately improves the human condition. 
+
+%The gate: This is the mechanism that allows us to reach the quality. It is manifested as a living common pattern language
+% that permits us to create multiform designs which fulfill multifaceted needs. It is the universal "ether" of patterns and their 
+% relationships that permeate a given domain. The gate is the conduit to the quality. 
+
+
+\begin{frame}{Historique (3/5)}
+\begin{itemize}
+\item Voir la page \emph{History of Patterns} dans le WikiWikiWeb de Ward Cunningham: http://c2.com/cgi-bin/wiki?HistoryOfPatterns
+\item \emph{Using Pattern Languages for Object-Oriented Programs}. Ward Cunningham and Kent Beck. OOPSLA'87.
+\end{itemize}
+\end{frame}
+
+%In 1987, Ward Cunningham and Kent Beck were working with Smalltalk and designing user interfaces. They decided to use some of Alexander's 
+%ideas to develop a small five pattern language for guiding novice Smalltalk programmers. They wrote up the results and presented them at 
+%OOPSLA'87 in Orlando in the paper "Using Pattern Languages for Object-Oriented Programs".
+
+
+\begin{frame}{Historique (4/5)}
+\begin{itemize}
+\item \emph{Advanced C++ Programming Styles and Idioms}. Jim Coplien, 1991. 
+\item Workshops OOPSLA de 90 à 92.
+\end{itemize}
+\end{frame}
+
+%Soon afterward, Jim Coplien (more affectionately referred to as "Cope") began compiling a catalog of C++ idioms 
+% (which are one kind of pattern) and later published them as a book in 1991, Advanced C++ Programming Styles and Idioms. 
+%From 1990 to 1992, various members of the Gang of Four had met one another and had done some work compiling 
+%a catalog of patterns. Discussions of patterns abounded at OOPSLA'91 at a workshop given by Bruce Andersen (which 
+%was repeated in 1992). Many pattern notables participated in these workshops, including Jim Coplien, Doug Lea, Desmond 
+%D'Souza, Norm Kerth, Wolfgang Pree, and others.
+
+\begin{frame}{Historique (5/5)}
+\begin{itemize}
+\item Hillside Group (Conférences PLoP): Kent Beck, Grady Booch, Richard Gabriel et al. OOPSLA 1993, 94.
+\item Design Patterns [GoF]. 1995.
+\end{itemize}
+\end{frame}
+
+% In August 1993, Kent Beck and Grady Booch sponsored a mountain retreat in Colorado, the first meeting of what is now known 
+% as the Hillside Group. Another patterns workshop was held at OOPSLA'93 and then in April of 1994, the Hillside Group met 
+%again (this time with Richard Gabriel added to the fold) to plan the first PLoP conference. 
+%Shortly thereafter, the [GoF] Design Patterns book was published, and the rest, is history.
+
+
+%----------------------------------------------------------------------------- Définition
+\section{Définition}
+\frame{\tableofcontents[currentsection,hideothersubsections]}
+
+\begin{frame}{Définition}
+
+\begin{description}
+\item [D\'efinition g\'en\'erale:] Un patron est une solution éprouvée d'un problème dans un contexte. 
+
+\item [Alexander:] Chaque patron est une règle en trois parties, qui exprime  la relation entre un certain contexte, un problème et une solution.
+\end{description}
+\end{frame}
+
+%Il n'est pas possible de contester la première définition, parce qu'elle n'est pas fausse. Par contre, elle peut être mal interprétée.
+
+
+\begin{frame}{Définition (TWoB 1/3)}
+
+\textbf{Plus qu'une solution à un problème dans un contexte:}\\
+
+\begin{small}
+``Comme un élément du monde, chaque patron est une relation entre un certain contexte, un certain système de forces qui se produisent à plusieurs reprises dans ce contexte, et une certaine configuration spatiale qui permet à ces forces de se constituer. (\ldots)
+\end{small}
+\end{frame}
+
+\begin{frame}{Définition (TWoB 2/3)}
+
+\begin{small}
+(\ldots) Comme un élément du langage, un patron est une instruction qui montre comment cette configuration spatiale peut être utilisée, à répétition, pour constituer le système de forces, partout où le contexte le rend relevant. (\ldots)
+\end{small}
+\end{frame}
+
+\begin{frame}{Définition (TWoB 3/3)}
+
+\begin{small}
+(\ldots) En bref, un patron est en même temps une chose qui se produit dans le monde, et la règle qui nous dit comment la créer, et quand nous devons la créer. C'est donc les deux, un processus et une chose; la description d'une chose vivante et la description du processus qui générera cette chose (TWoB pp. 247).''
+\end{small}
+\end{frame}
+
+%Si on rentre dans une chambre et on demande à Alexander d'énumérer tous les patrons qu'il voit, il ne regardera pas à des feuilles 
+%décrivant des patrons, mais il regardera autour de lui et dira quels patrons il voit dans la configuration spatiale. De même, si on 
+%demande à un expert en patrons quels sont les patrons qu'il voit dans un système, il regardera le code et essaiera de les énumérer. 
+
+\begin{frame}{Définition (Riehle et Zullighoven)}
+
+Dirk Riehle et Heinz Zullighoven dans \emph{Understanding and Using Patterns in Software Development}:
+\begin{quote}
+``Un patron est l'abstraction d'une forme concrète qui se reproduit dans un contexte spécifique et non arbitraire''. 
+\end{quote}
+\end{frame}
+
+%The above authors point out that, within the software patterns community, the notion of a pattern is "geared toward solving problems in design." 
+%More specifically, the concrete form which recurs is that of a solution to a recurring problem. But a pattern is more than just a battle-proven 
+%solution to a recurring problem. The problem occurs within a certain context, and in the presence of numerous competing concerns. The proposed 
+%solution involves some kind of structure which balances these concerns, or "forces", in the manner most appropriate for the given context. 
+%Using the pattern form, the description of the solution tries to capture the essential insight which it embodies, so that others may learn from it, and 
+%make use of it in similar situations. The pattern is also given a name, which serves as a conceptual handle, to facilitate discussing the pattern and 
+%the jewel of information it represents. So a definition which more closely reflects its use within the patterns community is: 
+
+
+%A pattern is a named nugget of instructive information that captures the essential structure and insight of a successful family of proven solutions 
+%to a recurring problem that arises within a certain context and system of forces.
+
+
+\begin{frame}{Définition (Coplien 1/2)}
+
+Jim Coplien, dans \emph{Software Patterns}:
+
+\begin{quote}
+``J'aime bien faire la relation entre cette définition et les patrons de couture. \\
+Je pourrais vous expliquer comment faire un habit en spécifiant la route que les ciseaux doivent suivre à travers le tissu en terme d'angles et longueur de coupe. (\ldots)
+\end{quote}
+\end{frame}
+
+\begin{frame}{Définition (Coplien 2/2)}
+
+
+\begin{quote}
+(\ldots) Ou alors, je peux vous donner un patron. En lisant la spécification, vous n'auriez aucune idée de ce qui était en train d'être fait, ou si vous aviez fait ce qu'il fallait, avant la fin. \\
+Le patron annonce le produit: il est la règle pour réaliser une chose, et aussi, dans différents aspects, la chose elle-même.''
+\end{quote}
+
+\end{frame}
+
+%So we see that a pattern involves a general description of a recurring solution to a recurring problem replete with various goals and constraints. 
+%But a pattern does more than just identify a solution, it also explains why the solution is needed!
+
+\begin{frame}{Définition (wiki 1/3)}
+
+Wiki wiki web:
+\begin{quote}
+Les patrons de conception sont une technique utile pour la transmission de connaissances
+sur des problèmes récurrents dans le développement logiciel.
+\end{quote}
+\end{frame}
+
+\begin{frame}{Définition (wiki 2/3)}
+
+Wiki wiki web (bis):
+\begin{quote}
+Un patron de conception nomme, motive et explique systématiquement une conception générique
+qui s'adresse à un problème de conception récurrent dans les systèmes à objets. \\
+Il décrit le
+problème, la solution, le moment d'appliquer cette solution et ses conséquences. (\ldots)
+\end{quote}
+\end{frame}
+
+\begin{frame}{Définition (wiki 3/3)}
+
+
+\begin{quote}
+(\ldots) Il donne aussi des conseils
+et des exemples de mise en oeuvre. \\
+La solution est un arrangement d'objets et classes qui résolvent 
+le problème. \\
+Elle est personnalisée et mise en oeuvre pour résoudre le problème dans
+un contexte particulier. 
+\end{quote}
+\end{frame}
+
+
+\begin{frame}{Contre-définition (1/2)}
+
+Qu'est-ce que n'est pas un patron?
+\begin{itemize}
+\item Une règle.
+\item Une recette consacrée.
+\item Une structure de données.
+\item Une solution isolée à un problème dans un contexte.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Contre-définition (2/2)}
+
+Contre-exemple:
+\begin{description}
+\item [Probl\`eme]: comment allouer des objets dans la mémoire?
+\item [Contexte]: un système à objets dans la mémoire virtuelle.
+\item [Solution]: exécuter quelques problèmes typiques et découvrir quels objets communiquent fréquemment et les placer dans une même page.
+\end{description}
+\end{frame}
+
+%Ceci n'est pas un patron. C'est simplement une solution à un problème dans un contexte. Il pourrait devenir un patron s'il parlait de 
+%configuration d'objets qui communiquent selon une définition particulière d'efficience, dans un système de mémoire virtuelle. 
+%On pourrait imaginer autres choses qui pourraient être un patron selon la définition simpliste, comme la solution au problème de découvrir 
+%le nombre d'éléments dans « plusieurs ensembles de cette taille » est d'utiliser la multiplication.
+%Alexander aurait pu avoir écrit la définition d'un patron en une phrase, mais il a choisi d'écrire un livre de 550 pages pour le faire, parce que le  concept est complexe. 
+
+\begin{frame}{Langages de patrons (1/2)}
+
+\begin{itemize}
+\item Chaque patron est une phrase dans un langage de patrons.
+\item Un langage de patrons est une collection de patrons.
+\item Les patrons forment un graphe.
+\item Chaque patron produit un contexte pour ceux qui le suivent.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Langages de patrons (2/2)}
+
+\begin{itemize}
+\item Chaque patron se construit dans le contexte de ceux qui l'ont précédé.
+\item Un langage de patrons définit un \emph{style architectural}.
+%\item Faire l'effort d'écrire des petits langages de patrons et de l'agrandir avec en fonction de l'expérience.
+\item Les patrons isolés ont une utilité limitée.
+\end{itemize}
+\end{frame}
+
+
+
+%----------------------------------------------------------------------------- Exemple1
+%\section{Premier exemple: \\ Cinq couleurs dans l'assiette}
+\section{Premier exemple}
+\frame{\tableofcontents[currentsection,hideothersubsections]}
+
+\begin{frame}
+\frametitle{Exemple I}
+\framesubtitle{Nom, problème, contexte}
+\begin{description}
+\item [Nom]: Cinq couleurs dans l'assiette.
+\item [Probl\`eme]: Comment rendre appétissant, à peu de frais, un plat simple tel qu'une assiette de crudités?
+
+\item [Contexte]: La cuisine au quotidien, notamment la cuisine familiale où les parents et les enfants partagent la même table, le même repas.
+\end{description}
+\end{frame}
+
+\begin{frame}{Forces}
+\framesubtitle{Cinq couleurs dans l'assiette}
+\begin{itemize}
+\item Au jour le jour, la plupart d'entre nous avons peu de temps à consacrer à la préparation des repas.
+\item Les techniques culinaires avancées sont peu familières du grand public.
+\item La préparation des plats contribue de façon significative au plaisir des repas.
+\item Une certaine diversité des aliments est nécessaire pour une nourriture équilibrée.
+\item Les enfants mangent plus volontiers quand l'assiette est appétissante.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Solution}
+\framesubtitle{Cinq couleurs dans l'assiette}
+\begin{itemize}
+\item Pour une même assiette, choisir les ingrédients de façon à ce que les cinq couleurs suivantes soient présentes: blanc, vert, rouge, jaune, noir.
+\item Les quantités des ingrédients pour chaque couleur n'ont pas besoin d'être identiques: une seule touche de couleur peut suffire.
+\item Les couleurs peuvent être approximatives: par exemple, un ingrédient orange peut donner la couleur rouge ou jaune en fonction du reste de l'assiette.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemples}
+\framesubtitle{Cinq couleurs dans l'assiette}
+
+\begin{itemize}
+\item Ce patron convient particulièrement bien pour la composition d'assiettes de crudités. 
+\item Les couleurs courantes dans les crudités sont le vert (salade, germes), le blanc (navet, céleri), le rouge (radis, tomate). 
+\item Le noir et le jaune sont moins répandus: une simple olive noir au milieu de l'assiette, un quartier ou une rondelle de citron sur le bord transforment une assiette banale en une assiette appétissante. 
+%\item Vos enfants vont enfin manger des crudités.
+\item La salade grecque, par exemple, respecte ce patron: tomates, concombre, feta, olives noires, huile d'olive.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Implémentation}
+\framesubtitle{Cinq couleurs dans l'assiette}
+
+\begin{itemize}
+\item La couleur de la porcelaine ou de la faïence, les décorations peintes sur l'assiette peuvent être prises en compte pour obtenir le compte des couleurs.
+\item On aura dans sa cuisine en permanence des ingrédients qui apportent les couleurs:
+\begin{itemize}
+\item olives noires et vertes.
+\item citrons.
+\item tomates, tomates cerise.
+\item salade, germes de luzerne.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Auteur}
+\framesubtitle{Cinq couleurs dans l'assiette}
+\begin{description}
+\item [Origine]: Cuisine chinoise traditionnelle, notamment la cuisine macrobiotique.
+\item [Auteur]: Bruno Borghi. Mont St-Michel, 7 juin 2000.
+\end{description}
+\end{frame}
+
+
+%----------------------------------------------------------------------------- Canevas
+\section{Canevas de description}
+\frame{\tableofcontents[currentsection,hideothersubsections]}
+
+\begin{frame}{Canevas de description}
+
+
+\begin{itemize}
+\item Les patrons sont décrits sous la forme littéraire.
+\item Ils ne sont que ``documentation''.
+\item Les composants essentiels sont: Nom, Problème, Contexte, Forces et Solution.
+\item Il existe plusieurs canevas de description.
+\item Exemples: GoF, Alexander, Coplien, Cockburn, Portland.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Canevas essentiel}
+
+
+\begin{itemize}
+\item Contexte.
+\item Nom.
+\item Problème.
+\item Forces.
+\item Solution.
+\item Auteur et date.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Contexte}
+
+\begin{itemize}
+\item La place du patron dans le langage de patrons.
+\item Habituellement négligé ou pas mis en valeur dans les patrons logiciels.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Nom (1/2)}
+
+\begin{itemize}
+\item Un label significatif qui traduit le principe du patron.
+\item Le nom a tendance à être basé sur la solution.
+\item Il doit être court, concis, riche sémantiquement, révélateur ou suggestif.
+\item Les noms ingénieux (mais pas trop) sont mémorables.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Nom (2/2)}
+
+\begin{itemize}
+\item Le nom devient une partie du vocabulaire du domaine.
+\item Les patrons du GoF sont des analogies (Bridge, Façade, etc.).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Problème}
+
+\begin{itemize}
+\item Habituellement, le problème est posé comme une question, ou comme un énoncé.
+\item C'est la première chose que l'on regarde.
+\item La compréhension du problème vient avec l'analyse des forces.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Forces (1/3)}
+
+\begin{itemize}
+\item Le coeur d'un patron.
+\item La totalité est un champ de forces ou compromis.
+\item Les patrons individuels encapsulent des forces en relation.
+\item Permettent de traiter un patron à la fois.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Forces (2/3)}
+
+Qu'est-ce qui fait une force?
+\begin{itemize}
+\item Ce qui rend le problème complexe.
+\item Pourquoi les solutions évidentes ne sont pas adéquates.
+\item Les facteurs qui contrecarrent d'autres approches d'ou autres solutions.
+\item Les contradictions et les conflits.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Forces (3/3)}
+
+Les patrons équilibrent les forces dans un contexte:
+\begin{center}
+\includegraphics[height=5cm]{forces}
+\end{center}
+\end{frame}
+
+\begin{frame}{Forces (Alexander 1/2)}
+
+\begin{quote}
+``Personne ne deviendra un meilleur concepteur en suivant aveuglément une méthode (\ldots)
+\end{quote}
+\end{frame}
+
+\begin{frame}{Forces (Alexander 2/2)}
+\begin{quote}
+(\ldots) Si on essaye de comprendre l'idée que l'on peut créer des patrons abstraits, en étudiant l'implication d'un système limité de forces, et que l'on peut créer des nouvelles formes par la combinaison de ces patrons \--- et réaliser que cela ne marchera qu'avec des patrons qui traitent avec un système de forces dont l'interaction interne est très dense et dont l'interaction avec d'autres forces du monde est très faible \--- alors, dans le processus d'essai pour créer ces diagrammes ou patrons pour soi, on peut trouver l'idée centrale à laquelle ce livre se consacre''. \\ Préface de \emph{Notes on Synthesis of Form}.
+\end{quote}
+\end{frame}
+
+\begin{frame}{Solution (1/2)}
+
+\begin{itemize}
+\item Les solutions équilibrent les forces.
+\item Les solutions s'appliquent au système comme un tout: elles sont transformables et non fixes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Solution (2/2)}
+
+\begin{itemize}
+\item Le centre d'intérêt de la plupart des gens.
+\item Souvent, un patron décrit une solution directe et simpliste: il faut donc essayer de résoudre le problème à un niveau plus profond.
+\item Plutôt que recenser les solutions, les patrons doivent encourager le lecteur à manoeuvrer les forces et remanier les solutions.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Solution (Alexander)}
+
+\begin{quote}
+``Encore, le patron opère sur la totalité: ils ne sont pas des parties, qui peuvent être ajoutées \--- mais des relations, qui s'imposent aux précédentes pour mieux détailler, mieux structurer et donner plus de substance \--- de manière à faire émerger graduellement, mais toujours dans sa totalité,  la substance de la construction, dans chaque phase de sa croissance.\\
+Alexander, \emph{The Timeless Way of Building}, p. 459.
+\end{quote}
+\end{frame}
+
+
+
+
+\begin{frame}{Canevas GoF (1/3)}
+
+
+\begin{description}
+\item [Nom]: Un label significatif qui traduit le principe du patron.
+\item [Intention]: Le problème de conception concerné.
+\item [Alias]: Autres noms connus, s'il en existe.
+\item [Motivation]: Un exemple d'application du problème de conception en cause et la solution proposée.
+\item [Indications d'utilisation]: Le contexte dans lequel le patron peut être appliqué.
+\end{description}
+\end{frame}
+
+
+\begin{frame}{Canevas GoF (2/3)}
+
+
+\begin{description}
+\item [Structure]: Le diagramme de classes (OMT) représentant la solution.
+\item [Participants]:  Le rôle des différentes classes qui composent le diagramme. 
+\item [Collaborations]: La collaboration entre les participants.
+\item [Cons\'equences]: Compromis et bénéfices de son utilisation.
+\end{description}
+\end{frame}
+
+
+\begin{frame}{Canevas GoF (3/3)}
+
+\begin{description}
+\item [Impl\'ementation]:  Astuces et techniques pour l'implémenter.
+\item [Exemples de code]: Extraits de code exemple en Smalltalk et C++.
+\item [Utilisations connues]: Références à des systèmes réels (au moins deux) où le patron est utilisé.
+\item [Patrons analogues]: Les patrons en relation étroite avec celui-ci, leurs différences, la manière de les associer.
+\end{description}
+\end{frame}
+
+
+\begin{frame}{Canevas de Coplien}
+
+\begin{itemize}
+\item Nom.
+\item Contexte.
+\item Problème.
+\item Forces.
+\item Solution.
+\item Croquis.
+\item Contexte résultant.
+\item Raisonnement.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Canevas de Cockburn (1/2)}
+
+\begin{itemize}
+\item Onglet.
+\item Forces en équilibre.
+\item Facteurs affectant l'équilibre.
+\item Action recommandée.
+\item Contexte résultant.
+\item Effet de surdosage.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Canevas de Cockburn (2/2)}
+
+\begin{itemize}
+\item Patrons en relation.
+\item Spécialisations.
+\item Principes concernés.
+\item Situations (exemples).
+\item Lecture.
+\end{itemize}
+\end{frame}
+
+
+
+%----------------------------------------------------------------------------- HOPP Pattern
+\section{Deuxième exemple}
+%\section{Deuxième exemple: \\ Half-Object + Protocol}
+\frame{\tableofcontents[currentsection,hideothersubsections]}
+
+
+%---------------------------------------------------------------------- Applicability
+\begin{frame}{HOPP - Applicabilité}
+
+
+\ldots une fois que vous avez décidé de vos objets et de leurs associations, c'est l'heure de déterminer comment vos objets sont placés par rapport à  l'espace d'adressage dans lequel ils vont s'exécuter. Ce patron vous aide à déterminer où ils sont placés et leur position relative aux frontières de l'espace d'adressage.
+
+\end{frame}
+%------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------  Problem
+\begin{frame}{HOPP - Problème}
+
+
+Parfois, un même objet doit apparaître sur différents contextes informatiques (i.e. espaces d'adressage).\\
+Comment pouvons nous rendre transparent la différence entre un et plusieurs (e.g. local vs. distribué) espaces d'adressage? 
+\end{frame}
+%------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------- Forces
+\begin{frame}{HOPP - Forces (1/8) }
+
+
+\begin{itemize}
+	\item Complexité.
+	\item Distribution.
+	\item Disponibilité d'information.
+	\item Coût.
+	\item Performance.
+\end{itemize}
+\end{frame}
+%------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------- Forces
+\begin{frame}{HOPP - Forces (2/8)}
+
+
+Souvent, les systèmes informatiques doivent être mis en \oe uvre sur des multiples espaces d'adressage, pour différentes raisons: \\
+\begin{itemize}
+	\item Coût.
+	\item Taille, 
+	\item Répartition physique.
+	\item Diversité des environnements de programmation.
+	\item Normalisation.
+	\item etc. 
+\end{itemize}
+\end{frame}
+%------------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------- Forces
+\begin{frame}{HOPP - Forces (3/8)}
+
+
+Parfois, ces systèmes peuvent être facilement décomposés en objets, vivant chacun dans un espace d'adressage. \\
+\vspace{.5cm}
+Quelques objets seront contraints à exister dans certains espaces d'adressage par le couplage avec le matériel (senseurs, lecteurs de disque, etc.). \\
+\vspace{.5cm}
+D'utres objets peuvent être placés en fonction de ces couplages.
+
+\end{frame}
+%------------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------- Forces
+\begin{frame}{HOPP - Forces (4/8)}
+
+
+Parfois, cependant, un concept existe en deux espaces différents, et il est très difficile de le décomposer. \\
+\vspace{.5cm}
+Ou alors, un objet doit collaborer avec d'autres objets, dans plus d'un espace adressage, parce qu'il a besoin d'informations de plus d'un espace d'adressage pour accomplir son comportement. \\
+\vspace{.5cm}
+De même, des demandes (asynchrones) arrivant d'objets des deux espaces doivent être traitées. 
+
+
+\end{frame}
+%------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------- Forces
+\begin{frame}{HOPP - Forces (5/8)}
+
+
+Dans ce cas, aucun des espaces ne peut réaliser la tâche seul. \\
+\vspace{.5cm}
+Par conséquent, un objet doit exister dans plus d'un espace d'adressage. \\
+\vspace{.5cm}
+L'objet en question doit être divisé en un ou plusieurs objets par espace d'adressage.
+
+\end{frame} 
+
+\begin{frame}{HOPP - Forces (6/8)}
+
+Diviser un objet à travers plusieurs espaces d'adressage introduit une complexité supplémentaire, puisqu'un seul objet est plus simple que deux demi-objets, plus un protocole entre les deux. \\
+\vspace{.5cm}
+Un demi objet pourrait implémenter tout le comportement et consulter les autres objets quand il a besoin de retrouver des informations ou réaliser une action.
+
+\end{frame}
+%------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------- Forces
+\begin{frame}{HOPP - Forces (7/8)}
+
+
+Si ces interactions/collaborations sont fréquentes, le coût (d'exécution ou d'attente) de construction des objets-message et de les envoyer à un objet d'un autre espace d'adressage peut être inacceptable.
+
+\end{frame}
+
+\begin{frame}{HOPP - Forces (8/8)}
+Répartir un objet en deux parties égales permet à chaque partie de répondre à plusieurs demandes sans consulter un autre espace d'adressage, mais peut résulter en une duplication de fonctionnalité et en un  besoin de maintenir les deux objets synchronisés. \\
+\vspace{.5cm}
+Cette répartition isole l'interface de l'objet du protocole utilisé entre les demi-objets.
+
+\end{frame}
+%------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------- Therefore
+\begin{frame}{HOPP - En conséquence (1/3)}
+
+
+Diviser l'objet en deux demi-objets indépendants (un dans chaque espace d'adressage) avec un protocole entre eux.
+\vspace{.5cm}
+
+Dans chaque espace d'adressage, implémenter toute fonctionnalité nécessaire pour l'interaction avec les autres objets dans cet espace d'adressage. (Ceci peut résulter en une fonctionnalité dupliquée, i.e., implémentée dans les deux espaces d'adressage). (\ldots)
+\end{frame}
+
+\begin{frame}{HOPP - En conséquence (2/3)}
+
+(\ldots) Définir le protocole entre les deux demi-objets qui coordonne les activités des deux et porte l'information essentielle ayant besoin d'être passée entre les espaces d'adressage.
+
+\end{frame}
+%------------------------------------------------------------------------------
+
+
+\begin{frame}{HOPP - En conséquence (3/3)}
+
+\includegraphics[height=5cm]{hopp}
+\end{frame}
+
+
+%---------------------------------------------------------------------- Related Patterns
+\begin{frame}{HOPP - Patrons connexes}
+\vspace{20pt}
+
+Une fois que la fonctionnalité de chaque demi-objet est déterminée, le protocole entre eux peut être défini. \\
+\vspace{.5cm}
+Ceci implique l'utilisation d'autres patrons pour concevoir le protocole (Message as Object, Message Parameter as Object), plus les mécanismes pour réaliser la création  (information collection, formatting) et la réception (parsing, handling) du message.
+\end{frame}
+%------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------- Examples
+\begin{frame}{HOPP - Exemples (1/3)}
+\vspace{20pt}
+
+%\begin{tiny}
+\begin{itemize}
+
+\item Distribution physique: 
+\begin{itemize}
+\item Débogueurs non natifs. 
+\item Services téléphoniques distribués à travers un réseau national. 
+\item Systèmes accédant à des dispositifs matériels, comme des senseurs. 
+\item Interfaces utilisateurs distantes de l'information (bases de données centralisées). 
+\item Bases de données réparties (dupliquées).
+\end{itemize}
+\end{itemize}
+%\end{tiny}
+\end{frame}
+%------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------- Examples
+\begin{frame}{HOPP - Exemples (2/3)}
+\vspace{20pt}
+
+\begin{itemize}
+\item Taille: 
+	\begin{itemize}
+	\item Systèmes où les fonctions doivent être accomplies dans un microprocesseur esclave, en raison du coût en temps réel de la fonction.
+	\end{itemize}
+\item Environnement de programmation hétérogènes: 
+	\begin{itemize}
+	\item L'interface utilisateur écrite en Smalltalk d'un débogeur C++.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{HOPP - Exemples (3/3)}
+\vspace{20pt}
+
+\begin{itemize}
+\item Normalisation: 
+	\begin{itemize}
+	\item Les points de contrôle de service (SCP) contiennent les logiciels créés par des opérateurs téléphoniques pour modifier les appels qui passent par les switches du réseau téléphonique.
+	\item Ces logiciels peuvent ne pas avoir la permission de s'exécuter dans ces switches. 
+	\item [$\rightarrow$] \emph{(C'est aussi un exemple d'environnement de programmation hétérogène, car les switches ont des environnement propriétaires, tandis que les SCP utilisent des environnement basés sur UNIX)}.
+	\end{itemize}
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}{Auteur}
+\begin{itemize}
+\item Gerard Meszaros
+\item Affiliation: BNR, Canada
+\item PO Box 3511, Station C,
+\item Ottawa, Ontario Canada K1Y 4H7
+\item E-mail: gerard@bnr.ca
+\item Phone: (613) 763-7860
+\item Fax: (613) 765-4855
+\end{itemize}
+\begin{tiny}
+Current contact information: gerard.meszaros@acm.org, 87 Connaught Dr. NW, Calgary, Alberta, Canada T2K 1V9, 403-264-5840, FAX 403-233-2021.
+\end{tiny}
+\end{frame}
+
+
+%------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------- Caractéristiques
+\section{Caractéristiques}
+\frame{\tableofcontents[currentsection,hideothersubsections]}
+
+
+\begin{frame}{Caractéristiques d'un bon patron}
+
+\begin{itemize}
+\item Il doit être une solution à un problème dans un contexte.
+\item Il est l'élément nécessaire à l'intégrité d'un ensemble, compris dans le contexte d'autres patrons dans cet ensemble.
+\item Il doit être capable d'expliquer à celui qui doit résoudre le problème, comment le faire.
+\item La solution doit être mature et éprouvée.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Caractéristiques d'un bon patron}
+
+
+\begin{itemize}
+\item Il doit contribuer au confort humain ou à la qualité de vie.
+\item La solution doit être construite à l'aide de la perspicacité de celui qui doit résoudre le problème, et peut être implémentée un million de fois sans être deux fois la même.
+\item Il doit avoir un ensemble dense de forces en interaction, qui sont indépendantes des forces d'autres patrons.
+\item Il tend à avoir une harmonie géométrique.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Un patron bien écrit}
+
+\begin{itemize}
+
+\item Il est court.
+\item Il raconte une histoire.
+\item Il est une phrase dans un langage de patrons. 
+\item Il est attentif à l'esthétique.
+\item Il a un élément humain explicite.
+\end{itemize}
+\end{frame}
+
+%%----------------------------------------------------------------------------- Null Patterns
+\section{Troisième exemple}
+%\section{Troisième exemple: \\ Null Object}
+%\frame{\tableofcontents[currentsection,hideothersubsections]}
+
+%
+%\begin{frame}{Quatre patrons: Null Object}
+
+%\begin{itemize}
+%	\item Lire et les comparer.
+%	\item Lequel préférez-vous?
+%	\item Pourquoi?
+%	\item Lequel est techniquement supérieur?
+%	\item Lequel est supérieur comme littérature?
+%	\item Où utiliseriez-vous ces patrons?
+%\end{itemize}
+%\end{frame}
+
+%%----------------------------------------------------------------------------- Ecriture
+
+%\section{Écriture d'un patron}
+
+%\begin{frame}{Sept habitudes de l'auteur de patrons}
+%\begin{itemize}
+%\item Prendre le temps de réfléchir.
+%\item Choisir une structure.
+%\item Être concret dès le début.
+%\item Garder les patrons distincts et complémentaires.
+%\item Les présenter de manière efficace.
+%\item Itérer inlassablement. 
+%\item Collecter et incorporer les commentaires.
+%\end{itemize}
+%\end{frame}
+
+%
+%\begin{frame}{Lequel préférez-vous?}
+%\begin{itemize}
+%\item Adopter un canevas de description.
+%\item Se baser sur un canevas éprouvé.
+%\item Présenter les sections essentielles.
+%\item Prendre le lecteur en considération.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}{Comment commencer l'écriture? (1/2)}
+%\begin{itemize}
+%\item Les approches changent avec les canevas.
+%\item Les approches linéaires ne marchent que rarement.
+%\item Il est souvent un bon choix de commencer par les forces, ou par la solution.
+%\end{itemize}
+%\end{frame}
+
+%
+%\begin{frame}{Comment commencer l'écriture? (2/2)}
+%\begin{itemize}
+%\item Autre suggestion: commencer par les connections avec autres patrons dans le contexte, ou dans le contexte résultant.
+%\item Le nom et le problèmes peuvent venir plus tard.
+%\item Développer son propre ``rituel'' et son approche.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}{Attribution}
+%\begin{itemize}
+%\item Citer toutes les sources.
+%\item Donner le crédit au créateur (le premier à l'avoir écrit).
+%\item Construire sur d'autres patrons si possible, et citer les sources. 
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}{Le processus de correction}
+%\begin{itemize}
+%\item Lecture du texte.
+%\item Accueil de l'auteur. 
+%\item Lecture d'un morceau par l'auteur.
+%\item Résumé.
+%\item Remarques positives d'abord.
+%\item Suggestions d'amélioration.
+%\item Demande de clarification par l'auteur.
+%\item Remerciement de l'auteur.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}{Au travail!}
+%Vous allez écrire votre premier patron !
+%\end{frame}
+
+\end{document}

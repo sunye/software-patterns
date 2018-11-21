@@ -1,0 +1,562 @@
+%\documentclass[final] {prosper} 
+%\documentclass[pdf,contemporain,slideColor,colorBG,accumulate,nototal]{prosper}
+%\documentclass[pdf,autumn,slideColor,colorBG,accumulate,nototal]{prosper}
+%\documentclass[pdf,frames,slideColor,colorBG,accumulate,nototal]{prosper}
+\documentclass[pdf,azure,slideColor,colorBG,accumulate]{prosper}
+%\documentclass[pdf,lignesbleues,slideColor,colorBG,accumulate,nototal]{prosper}
+
+
+\usepackage{graphics}
+\usepackage{makeidx}
+\usepackage[latin9]{inputenc}
+
+\title{10 fausse idées sur les patterns}
+\subtitle{Patterns: Top Ten Misconceptions }
+\author{(John Vlissides)}
+\slideCaption{Patterns: Top Ten Misconceptions}
+
+\begin{document}
+
+
+\maketitle
+
+\begin{slide} {Différentes phases de perception}
+
+\includegraphics [width=8cm] {phases.eps}
+
+\end{slide}
+
+\begin{slide} {Trois catégories de fausse idées}
+\vspace{1cm}
+\begin{enumerate}
+	\item  Sur ce que \emph{sont} les patterns.
+	\item  Sur ce qu'ils \emph{peuvent} faire.
+	\item  Sur \emph{la communauté qui encourage} leur utilisation.
+\end{enumerate}
+\end{slide}	
+
+
+
+\begin{slide} {Première fausse idée}
+\vspace{1cm}	
+\begin{verse}
+"Un pattern est la solution à un problème dans un contexte"	
+\end{verse}
+\vspace{1cm}
+Une des définitions de Alexander. \\
+$\Rightarrow$ Hérésie?
+
+\end{slide}
+
+\begin{slide} {Première fausse idée}
+\begin{verse}
+	"Un pattern est la solution à un problème dans un contexte."
+\end{verse}
+
+Un contre-exemple simple:
+
+\begin{description}
+	\item[Probl\'eme:]  Comment récupérer mon ticket de loto avant son 
+expiration?
+
+	\item[Contexte:]   Le chien a avalé le ticket une heure auparavant.
+
+	\item[Solution:]  Ouvrir le chien, retirer le ticket et courir au 
+bureau de tabac le plus proche.
+\end{description}
+\end{slide}
+
+ 
+\begin{slide} {Première fausse idée}
+\begin{verse}
+	"Un pattern est la solution à un problème dans un contexte."
+\end{verse}
+
+Que manque-t-il?
+\begin{description}
+	\item[R\'ecurrence:] La solution est pertinente ailleurs.
+	\item[Enseignement:]  Le lecteur peut tailler la solution à son 
+problème.
+	\item[Nom:]  Une manière de faire référence au pattern.
+\end{description}
+\end{slide}
+
+\begin{slide} {Un vrai pattern}
+\vspace{1cm}
+\begin{description}
+	\item[Nom]  Generation Gap.
+
+	\item[Contexte]  Un outil qui génère du code automatiquement. Les 
+	programmeurs modifient le code pour ajouter ou modifier le 
+	comportement.
+\end{description}
+\bigskip
+\begin{verse}
+	Comment empêcher que la régénération subséquent efface les 
+	modifications du programmeur?
+\end{verse}
+\end{slide}
+
+
+
+\begin{slide} {Un vrai pattern}
+\vspace{1cm}
+Forces:
+\begin{itemize}
+	\item  Besoin d'accès contrôlé au code généré.
+	\item  Une approche par commentaires est  peu esthétique et non vérifiable.
+	\item  Trouver les différences et fusionner automatiquement est trop 
+incertain.
+\end{itemize}
+\end{slide}
+
+
+\begin{slide} {Un vrai pattern}
+\vspace{1cm}
+Solution:
+\begin{itemize}
+	\item Utiliser l'héritage pour séparer le code généré des 
+	modifications. 
+\end{itemize}
+
+\includegraphics [width=6cm] {generation-gap.eps}
+%diagramme de classes
+
+\end{slide}
+
+
+\begin{slide} {Un vrai pattern}
+\vspace{1cm}
+Conséquences:
+\begin{itemize}
+	\item  Les modifications sont séparées du code générée.
+
+	\item  Les modifications peuvent avoir un accès privilégié.
+
+	\item  La régénération n'implique pas la remodification du code.
+
+	\item  Le nombre de classes est doublé.
+
+	\item  L'intégration dans des hiérarchies de classe existantes est 
+	plus complexe.
+\end{itemize}
+\end{slide}
+
+
+\begin{slide} {Deuxième fausse idée}
+\vspace{1cm}	
+	\begin{verse}
+		"Les patterns sont juste du jargon, règles, astuces de 
+		programmations, structures de données \ldots"
+	\end{verse}
+	\bigskip
+	Le renvoi méprisant: une familiarité superficielle, avec un soupçon 
+de cynisme.
+\end{slide}
+
+\begin{slide} {Deuxième fausse idée}
+	\begin{verse}
+		"Les patterns sont juste du jargon, règles, astuces de 
+		programmations, structures de données \ldots"
+	\end{verse}
+	\medskip
+	Jargon?
+	\begin{itemize}
+	\item e.g., "pattern," "forces," "QWAN" ("Quality Without A Name").
+	\item comparativement petit.
+	\item \emph{Un auteur de patterns efficace de modèle évite le jargon 
+spécifique }
+	\end{itemize}
+\end{slide}
+
+\begin{slide} {Deuxième fausse idée}
+	\begin{verse}
+		"Les patterns sont juste du jargon, règles, astuces de 
+		programmations, structures de données \ldots"
+	\end{verse}
+	\medskip
+	Règles?
+	\begin{itemize}
+	\item Les patterns ne sont pas utilisés aveuglément.
+	\end{itemize}
+	\medskip
+
+	Astuces de programmation? Structures?
+	\begin{itemize}
+	\item Accentuation exagérée sur la solution.
+	\end{itemize}
+\end{slide}
+
+\begin{slide} {Troisième fausse idée}
+\vspace{1cm}
+	\begin{verse}
+		"Quand on en a vu un, on en a vu tous"
+	\end{verse}
+	\medskip
+	\emph{Attention à la généralisation!}
+	\medskip
+	Éventail de styles, de portées, de détails, de maturité \--- et de qualités.
+
+\end{slide}
+
+\begin{slide} {Les principaux styles}
+\vspace{1cm}
+\begin{tabular} {l}
+\begin{minipage}{6cm}
+Alexander:
+	\begin{itemize}
+	\item Predecessor Patterns
+	\item Problem
+	\item Discussion
+	\item Solution
+	\item Successor Patterns
+	\end {itemize}
+\end{minipage}
+
+\begin{minipage}{6cm}
+Coplien:
+\begin{itemize}
+    \item  Problem
+    \item  Context
+    \item  Forces
+    \item  Solution
+    \item  Resulting Context
+\end{itemize}
+\end{minipage}
+\end{tabular}
+
+\end{slide}
+
+\begin{slide} {Les principaux styles}
+\vspace{1cm}
+Gang of Four (GOF)
+
+\begin{tabular} {l}
+\begin{minipage}{6cm}
+\begin{itemize}
+    \item  Intent
+    \item  AKA
+    \item  Motivation
+    \item  Applicability
+    \item  Structure
+    \item  Participants
+\end{itemize}
+\end{minipage}
+
+\begin{minipage}{6cm}
+\begin{itemize}
+    \item  Collaborations
+    \item  Consequences
+    \item  Implementation
+    \item  Sample Code
+    \item  Known Uses
+    \item  Related Patterns
+\end{itemize}
+\end{minipage}
+\end{tabular}
+
+\end{slide}
+
+\begin{slide} {La rédaction d'un pattern prend du temps}
+\vspace{1cm}
+Il a fallu quatre ans pour écrire les 23 patterns du GoF.
+\vspace{0.5cm}
+\begin{itemize}
+    \item  Archéologie.
+
+    \item  Identification et caractérisation des récurrences.
+
+    \item  Commentaires des relecteurs, communauté internet.
+
+    \item  Itération: réécriture entre 10 et 20 fois.
+
+    \item  La qualité est directement proportionnelle à l'effort.
+\end{itemize}
+\end{slide}
+
+\begin{slide} {Quatrième fausse idée}
+\begin{verse}
+    "Les patterns ont besoin d'un outil ou d'un support 
+    méthodologique pour devenir effectifs."
+\end{verse}
+
+Les patterns sont surtout de l'aliment pour le cerveau:
+\begin{enumerate}
+    \item  Capturer l'expérience.
+
+    \item  Communication.
+
+    \item  Documentation.
+
+    \item  Restructuration.
+\end{enumerate}
+\end{slide}
+
+\begin{slide} {Quelques outils sont utiles (\ldots)}
+\vspace{1cm}
+Édition CD du GOF: \\
+
+\vspace{0.5cm}
+%\includegraphics[height=5cm]{gof-cd.eps}
+\end{slide}
+
+
+\begin{slide} {(\ldots) et d'autres le sont moins}
+\begin{tabular} {l}
+\begin{minipage} {6cm}
+%\includegraphics[width=6cm]{budin3.eps}
+\end{minipage}
+
+\begin{minipage}[b] {4cm}
+Génération automatique de code.
+\end{minipage}
+\end{tabular}
+\end{slide}
+
+\begin{slide} {(\ldots) et d'autres le sont moins}
+
+\begin{minipage}{6cm}
+%\includegraphics[width=6cm]{budin6.eps}
+\end{minipage}
+\begin{minipage} [t] {4cm}
+Spécification des compromis de conception.
+\end{minipage}
+
+\end{slide}
+
+\begin{slide} {(\ldots) et d'autres le sont moins}
+
+\begin{minipage} {6cm}
+%\includegraphics [width=6cm]{budin4.eps}
+\end{minipage}
+\begin{minipage} [bottom] {4cm}
+Et génération de code.
+Voyant, mais:
+\begin{itemize}
+	\item économise principalement l'écriture.
+	\item le cerveau reste le problème.
+	\item plus utile à la pédagogie.
+\end{itemize}
+\end{minipage}
+\end{slide}
+
+
+\begin{slide} {Résumé}
+\vspace{1cm}
+    Les patterns ne sont pas:
+\begin{itemize}
+    \item  La solution à un problème dans un contexte.
+
+    \item  Des jargons, des règles, ou des structures.
+
+    \item  Dépendants d'outils ou de méthodes.
+\end{itemize}
+\end{slide}
+
+\part{Fausses idées sur ce que les patterns peuvent faire.}
+
+\begin{slide} {Cinquième fausse idée}
+\vspace{1cm}
+\begin{verse}
+        "Les patterns assurent la réutilisabilité de code, meilleure 
+        productivité, la paix dans le monde, etc."
+\end{verse}
+\vspace{1cm}
+Les patterns n'assurent rien du tout! 
+
+Ils donnent le pouvoir de le faire \--- potentiellement.
+\end{slide}
+
+
+\begin{slide} {Sixième fausse idée}
+\vspace{1cm}    
+	\begin{verse}
+        "Les patterns \emph{génèrent} des architectures complètes."
+	\end{verse}
+	\vspace{0.5cm}
+    	Similaire à la fausse idée précédente, mais plus prétentieuse.
+\end{slide}
+
+
+\begin{slide} {Qu'est-ce que la "générativité"?}
+\vspace{1cm}
+Il n'y a pas de consensus. \\
+Le point de vue de Vlissides:
+\begin{itemize}
+	\item La capacité d'un pattern de créer un ``comportement émergent''.
+	\item Elle fait qu'un pattern devienne plus qu'une solution rapide.
+	\item Se repose sur les patterns.
+\end{itemize}
+\medskip
+\emph{Les patterns ne génèrent rien du tout, les gens, oui!}
+\end{slide}
+
+
+\begin{slide} {Septième fausse idée}
+\vspace{1cm}
+	\begin{verse}
+	Les patterns sont destinés à la conception ou à la programmation (à 
+objets).
+	\end{verse}
+
+\vspace{1cm}
+	La faute au GoF\ldots
+\end{slide}
+
+
+\begin{slide} {Pattern Languages of Program Design 1}
+\vspace{1cm}
+	\begin{enumerate}
+	\item [I.] Cadres d'applications et composants.
+	\item [II.] Systèmes et calcul réparti.
+	\end{enumerate}
+
+	\medskip
+	
+	\begin{itemize}
+	\item Processus de développement et organisation.
+	\item Design patterns et catalogues.
+	\item Architecture et communication.
+	\item Utilisation d'objets et styles.
+	\item Événements.
+	\end {itemize}
+
+\end{slide}
+
+\begin{slide} {Pattern Languages of Program Design 2}
+\vspace{1cm}
+	\begin{enumerate}
+	\item [I.] Patterns spécifiques aux langages et idiomes.
+	\end{enumerate}
+
+	\medskip
+	
+	\begin{itemize}
+	\item Patterns génériques.
+	\item Spécifiques.
+	\item Architecture.
+	\item Processus et organisation.
+	\item Programmation parallèle.
+	\item Systèmes répartis.
+	\end{itemize}
+\end{slide}
+
+\begin{slide} {Pattern Languages of Program Design 3}
+\vspace{1cm}
+	Nouveaux domaines:
+	
+	\begin{itemize}
+	\item Evolution des logiciels.
+	\item Test.
+	\item Diagnostique.
+	\item Systèmes de transports.
+	\item Rédaction de patterns.
+	\item Systèmes d'alarme anti-incendie.
+	\end{itemize}
+\end{slide}
+
+\begin{slide} {Huitième fausse idée}
+\vspace{1cm}
+	\begin{verse}
+	«Il n'y a pas d'évidence que les patterns peuvent aider quelqu'un.»
+	\end{verse}
+
+	Les bénéfices sont décrits dans:
+	\begin{itemize}
+	\item des revues (CACM, SP\&E).
+	\item des conférences (OOPSLA, ECOOP, ICSE).
+	\item des listes de discussion (patterns-discussion@cs.uiuc.edu)
+	\end{itemize}
+
+	\medskip
+	\emph{L'évidence est plutôt qualitative.}
+\end{slide}
+
+
+\begin{slide} {Résumé}
+\vspace{1cm}
+	Les patterns ne peuvent pas:
+	\medskip
+	\begin{itemize}
+	\item assurer la qualité, ni la réutilisabilité, ni rien d'autre.
+	\item générer des architectures entières.
+	\item être limités à la conception à objets.
+	\item être écartés en tant qu'immatures.
+	\end{itemize}
+\end{slide}
+
+\part{Fausses idées sur les la communauté des patterns}
+
+\begin{slide} {Neuvième fausse idée}
+	\begin{verse}
+	``La communauté des patterns est une clique d'élites
+	\end{verse}	
+
+	\begin{description}
+	\item [\'elite:] élite  n.  f. 1.  Ensemble  formé  par  les  
+meilleurs  éléments  d'une  communauté.  Oeuvre  destinée  à  une  
+élite. D'élite:  parmi  les  meilleurs.  \--- Un  tireur  d'élite,  
+particulièrement  habile. 2.  (Plur.)  Les  élites:  les  membres  
+des  catégories  sociales  jouissant  d'une  position  
+particulièrement  élevée.
+	\item [clique:] n.f. 1.  Péjor.  Groupe,  coterie.  Clique  de  
+politiciens  véreux. 2.  MILIT  Ensemble  des  tambours  et  des  
+clairons  d'un  régiment. 3.  SOCIOL  Groupe  de  personnes  liées  
+par  des  obligations  mutuelles.
+	\end{description}
+\end{slide}
+
+\begin{slide} {La communauté PLoP}
+\vspace{1cm}
+	Un microcosme de toute la communauté.
+	\bigskip
+	Diversité:
+	\begin{itemize}
+	\item Internationale
+	\item De grandes multinationales à de petites startups.
+	\item Analystes, concepteurs, programmeurs.
+	\item Étudiants et professeurs.
+	\item Des grands auteurs, et des débutants.
+	\end{itemize}
+\end{slide}
+
+\begin{slide} {La communauté PLoP}
+	Croissance et fluidité:
+	\begin{itemize}
+	\item Le nombre de participants a doublé en 3 ans.
+	\item Prolifération des conférences PLoD (Euro-, Chili-, Tele-).
+	\end{itemize}
+	\medskip
+	Accent sur l'expérience:
+	\begin{itemize}
+	\item Plus de praticiens que d'académiciens.
+	\item Les premiers partisans viennent de l'industrie.
+	\end{itemize}
+	\bigskip
+	Un mouvement des bases. 
+\end{slide}
+
+\begin{slide} {Dixième fausse idée}
+	\begin{verse}
+	``La communauté des patterns est égoïste et même conspiratrice."
+	\end{verse}
+\begin{itemize}
+    \item  Poppycock!
+
+    \item  Balderdash!
+
+    \item  Drivel!
+
+    \item  Malarkey!
+
+    \item  Humbug!
+
+    \item  Rot!
+
+    \item  Horse hockey!
+\end{itemize}
+
+\end{slide}
+
+\end{document}
+
