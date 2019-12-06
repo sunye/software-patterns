@@ -3,6 +3,7 @@
     "collaboration.md",
     "adapter.md",
 	"observer.md",
+	"abstract-factory.md",
 	"decorator.md", 
 	"strategy.md",
 	"composite.md",
