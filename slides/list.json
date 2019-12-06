@@ -1,6 +1,7 @@
 [
 	"index.md",
     "collaboration.md",
+    "adapter.md",
 	"decorator.md", 
 	"strategy.md",
 	"composite.md",
