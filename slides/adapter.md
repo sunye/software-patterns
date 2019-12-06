@@ -50,6 +50,8 @@ note:
   - let’s Adapter override some of Adaptee’s behavior, since Adapter is a subclass of Adaptee.
   - introduces only one object, and no additional pointer indirection is needed to get to the adaptee.
 
+----
+
 - An object adapter:
 
   - let’s a single Adapter work with many Adaptees—that is, the Adaptee itself and all of its subclasses (if any). The Adapter can also add functionality to all Adaptees at once.
