@@ -18,6 +18,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 In
   - Command
   - Façade
   - Proxy
+  - DTO
 
 - Concurrency Patterns
    - Reactor
@@ -52,6 +53,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 In
 
 - «Introduction to Patterns and Frameworks.» Dr. David L. Levine and Douglas C. Schmidt. Department of Computer Science Washington University, St. Louis.
 - «Head First Design Patterns: A Brain-Friendly Guide». Bert Bates, Kathy Sierra, Eric Freeman, Elisabeth Robson. O'Reilly Media, June 2009.
+- «Patterns of Enterprise Application Architecture». Martin Fowler. Addison-Wesley Professional, 2002.
 
 ----
 

@@ -1,6 +1,8 @@
 [
 	"index.md",
     "collaboration.md",
+    "adapter.md",
+	"observer.md",
 	"decorator.md", 
 	"strategy.md",
 	"composite.md",
@@ -12,5 +14,6 @@
     "pipes-filters.md",
     "watchdog.md",
     "reactor.md",
-    "message-queueing.md"
+    "message-queueing.md",
+    "dto.md"
 ]
