@@ -1,13 +1,21 @@
 image: node:13
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules/
+
+before_script:
+  - npm install
+  - npm run bower
+
 pages:
   stage: deploy
   script:
-  - npm install
-  - npm run bower
   - npm run dist
+  - mv dist public
   artifacts:
     paths:
-    - dist
+    - public
   only:
   - master
