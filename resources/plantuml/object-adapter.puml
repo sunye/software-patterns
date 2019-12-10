@@ -1,0 +1,39 @@
+@startuml class-adapter
+
+
+skinparam class {
+    BackgroundColor white
+    ArrowColor black
+    BorderColor black
+}
+
+skinparam note {
+    BackgroundColor lightyellow
+    ArrowColor black
+    BorderColor black
+}
+
+class Client{
+}
+
+interface /Target {
+    /request()*
+}
+
+class /Adapter {
+    /request()*
+}
+
+interface /Adaptee {
+    /specificRequest()
+}
+Client --> "1" "/Target"
+
+
+"/Adapter" ..|> "/Target"
+
+"/Adapter" --> "1 adaptee" "/Adaptee"
+
+note bottom of "/Adapter": Adapter::request()\n adaptee.specificRequest()
+
+@enduml

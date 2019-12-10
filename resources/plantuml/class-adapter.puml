@@ -1,0 +1,26 @@
+@startuml class-adapter
+
+class Client{
+}
+
+interface /Target {
+    /request()*
+}
+
+class /Adapter {
+    /request()*
+}
+
+class /Adaptee {
+    /specificRequest()
+}
+
+Client --> "1" "/Target"
+
+"/Adapter" ..|> "/Target"
+
+"/Adapter" --|> "/Adaptee"
+
+note bottom of "/Adapter": Adapter::request()\n this.specificRequest()
+
+@enduml
