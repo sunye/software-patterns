@@ -1,4 +1,4 @@
-# Adapter
+# *Adapter*
 
 ### [Gamma et al. 95] 
 
@@ -6,7 +6,7 @@
 
 ## Intent
 
-- An _adapter_ converts the interface from one class to another in accordance with the client's expectations.
+- An **adapter** converts the interface from one class to another in accordance with the client's expectations.
 
 ----
 
@@ -45,17 +45,22 @@ note:
 
 ## Implementation Tradeoffs
 
-- Class and object adapters have different trade-offs. A class adapter:
-  - adapts Adaptee to Target by committing to a concrete Adaptee class. As a consequence, a class adapter won’t work when we want to adapt a class and all its subclasses.
-  - let’s Adapter override some of Adaptee’s behavior, since Adapter is a subclass of Adaptee.
-  - introduces only one object, and no additional pointer indirection is needed to get to the adaptee.
+Class and object adapters have different trade-offs.
+
+-  A **class adapter**:
+  - adapts the *Adaptee* to the *Target* by committing to a concrete *Adaptee* class. 
+  As a consequence, a class adapter won’t work when we want to adapt a class and all its subclasses.
+  - lets the *Adapter* override some of the *Adaptee*’s behavior, since *Adapter* is a subclass of *Adaptee*.
+  - introduces only one object, and no additional pointer indirection is needed to get to the *Adaptee*.
 
 ----
 
-- An object adapter:
+- An **object adapter**:
 
-  - let’s a single Adapter work with many Adaptees—that is, the Adaptee itself and all of its subclasses (if any). The Adapter can also add functionality to all Adaptees at once.
-  - makes it harder to override Adaptee behavior. It will require subclassing Adaptee and making Adapter refer to the subclass rather than the Adaptee itself.
+  - lets a single *Adapter* work with many *Adaptee*s—that is, the *Adaptee* itself and all of its subclasses (if any). 
+  The *Adapter* can also add functionality to all *Adaptees* at once.
+  - makes it harder to override the *Adaptee* behavior. 
+  It will require subclassing *Adaptee* and making *Adapter* refer to the subclass rather than the *Adaptee* itself.
 
 ----
 
@@ -70,4 +75,4 @@ note:
 - `java.util.Arrays#asList()`
 - `java.util.Collections#list()`
 - `java.util.Collections#enumeration()`
-- `javax.xml.bind.annotation.adapters.XMLAdapter`
+- `javax.xml.bind.annotation.adapters.XML*Adapter*`
