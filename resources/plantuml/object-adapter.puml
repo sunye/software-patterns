@@ -1,5 +1,8 @@
-@startuml class-adapter
+@startuml object-adapter
 
+' left to right direction
+
+hide circle
 
 skinparam class {
     BackgroundColor white
@@ -13,10 +16,12 @@ skinparam note {
     BorderColor black
 }
 
+skinparam nodesep 90
+
 class Client{
 }
 
-interface /Target {
+interface /Target <<interface>> {
     /request()*
 }
 
@@ -24,15 +29,14 @@ class /Adapter {
     /request()*
 }
 
-interface /Adaptee {
+interface /Adaptee <<interface>> {
     /specificRequest()
 }
-Client --> "1" "/Target"
 
 
-"/Adapter" ..|> "/Target"
-
-"/Adapter" --> "1 adaptee" "/Adaptee"
+Client -right-> "1" "/Target"
+"/Adapter" .up.|> "/Target"
+"/Adapter" -right-> "1 adaptee" "/Adaptee"
 
 note bottom of "/Adapter": Adapter::request()\n adaptee.specificRequest()
 

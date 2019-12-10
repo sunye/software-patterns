@@ -28,7 +28,9 @@
 
 ## Structure of the *object adapter* pattern
 
-![](resources/png/adapter-structure.png)
+<!-- ![](resources/png/adapter-structure.png) -->
+
+![](resources/svg/object-adapter.svg) <!-- .element width="60%" -->
 
 ----
 
@@ -58,7 +60,7 @@ The previous slides have only presented the most common variant, ie. the *object
 
 ## Structure of the *class adapter* pattern
 
-
+![](resources/svg/class-adapter.svg) <!-- .element width="60%" -->
 
 ----
 
