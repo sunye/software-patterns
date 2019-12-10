@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
+    "bower": "^1.8.8",
     "coffeelint": "^1.16.0",
     "grunt": "^1.0.0",
     "grunt-build-control": "^0.7.1",
@@ -17,9 +18,9 @@
   "engines": {
     "node": ">=4"
   },
-    "scripts": {
-        "serve": "grunt serve",
-        "dist": "grunt dist"
-    }
-
+  "scripts": {
+    "serve": "grunt serve",
+    "dist": "grunt dist",
+    "bower": "bower install"
+  }
 }
