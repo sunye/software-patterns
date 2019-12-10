@@ -13,10 +13,10 @@ $ bower install
 
 Pour lancer un serveur de dev sur http://localhost:9000 :
 ```
-$ grunt serve
+$ npm run serve
 ```
 
 Pour générer le html dans le répertoire `dist` :
 ```
-$ grunt dist
+$ grnpm run dist
 ```

@@ -124,9 +124,14 @@ module.exports = (grunt) ->
             'watch'
         ]
 
-    grunt.registerTask 'dist',
-        'Save presentation files to *dist* directory.', [
+    grunt.registerTask 'testAnddist',
+        'Test then save presentation files to *dist* directory.', [
             'test'
+            'dist'
+        ]
+
+       grunt.registerTask 'dist',
+        'Save presentation files to *dist* directory.', [
             'buildIndex'
             'copy'
         ]
