@@ -10,7 +10,7 @@ Publiées ici : https://naomod.univ-nantes.io/software-design/software-patterns-
 Pour installer les dépendances :
 ```
 $ npm install
-$ npm bower
+$ npm run bower
 ```
 
 Pour lancer un serveur de dev sur http://localhost:9000 :
