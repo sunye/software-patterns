@@ -1,0 +1,13 @@
+image: node:13
+
+pages:
+  stage: deploy
+  script:
+  - npm install
+  - npm run bower
+  - npm run dist
+  artifacts:
+    paths:
+    - dist
+  only:
+  - master
