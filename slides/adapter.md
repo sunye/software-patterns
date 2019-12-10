@@ -22,9 +22,11 @@
 
 ![](resources/png/adapter-example.png)
 
+
 ----
 
-## Structure 
+
+## Structure of the *object adapter* pattern
 
 ![](resources/png/adapter-structure.png)
 
@@ -43,7 +45,24 @@ note:
 
 ----
 
-## Implementation Tradeoffs
+## *Class* and *object* adapters
+
+There are two main variants of the adapter pattern:
+
+- The **object adapter** uses a *reference* to the class that gets adapted, which means at runtime that there is one adapter object and one adaptee object.
+- The **class adapter** uses an *inheritance* to the class that gets adapted, which means at runtime that there is a single object.
+
+The previous slides have only presented the most common variant, ie. the *object adapter*.
+
+----
+
+## Structure of the *class adapter* pattern
+
+
+
+----
+
+## Implementation tradeoffs
 
 Class and object adapters have different trade-offs.
 
