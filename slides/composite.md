@@ -33,8 +33,8 @@
 ## Applicability
 
 - Use the Composite pattern when:
-  - you want to represent part-whole hierarchies of objects. 
-  - you want clients to be able to ignore the difference between compositions of objects and individual objects. Clients will treat all objects in the composite structure uniformly.
+  - you want to represent *part-whole* hierarchies of objects. 
+  - you want clients **to be able to ignore the difference between compositions of objects and individual objects**. Clients will treat all objects in the composite structure uniformly.
 
 
 ----
@@ -59,12 +59,12 @@ Clients are simplified, since they don’t have to deal with 2 different structu
 
 ## Implementation Tradeoffs
 
-- Explicit reference to the parent.
-- Sharing components.
-- Who manages components: 
-  - Component?
-  - Composite?
-- The Composite may be used as a buffer.
+- **Explicit reference to the parent**: sometimes the *Component* may need to know the *Composite* that contains it (if any).
+- **Sharing components**: sometimes a *Component* may be possessed by multiple *Composites* − can influence the behavior or the destruction of *Composites*.
+- **Where to define operations to add/remove components?**: 
+  - *Component* class? Possible error if not called on a *Composite*.
+  - *Composite* class? Need to type check  beforehand.
+- **The Composite may contain a *cache*** to store information on the sum of components it contains.
 
 ----
 
