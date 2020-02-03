@@ -1,64 +1,70 @@
-= Command
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
 
-=== [Gamma et al. 95]
+= _Command_
 
-'''
+Gamma et al. 95
 
 == Intent
 
 * Encapsulate a request as an object, thereby letting you parameterize clients with different requests, queue or log requests, and support undoable operations.
-'''
 
 == Motivation
 
 * Sometimes it's necessary to issue requests to objects without knowing anything about the operation being requested or the receiver of the request.
 * For example, graphical user interface buttons: only clients that create and use the button can implement the actions linked to this button.
-'''
 
 == Example
 
-image::png/command-example.png[align=center]
+image::command-example.png[align=center]
 
-'''
 
 == Solution
 
 * Implement requests as objects, whose classes are subclasses of the “Command” abstract class, which defines an interface for operation execution.
-'''
+
 
 == Structure
 
-image::png/command-structure.png[align=center]
+image::command-structure.png[align=center]
 
-'''
+
 
 == Implementation Tradeoffs
 
-* Commands store state informations for undo and redo operations.
+* Commands store state information for undo and redo operations.
 * Commands may be composed (see Composite pattern).
 * Sometimes, commands may implement operations directly, without delegation.
-'''
+
 
 == Author and Date
 
 * Design Patterns: Elements of Reusable Object-Oriented Software. Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994.
-'''
 
+
+[.impact]
 == More Examples
 
-'''
+== java.lang.Runnable
 
-=== java.lang.Runnable
+image::cd-runnable.png[align=center]
 
-image::png/cd-runnable.png[align=center]
-
-'''
-
+[.impact]
 == More Implementation Tradeoffs
 
-=== Command in Java 8 with Lambdas
+Command in Java 8 with Lambdas
 
-'''
 
 == Lambdas
 
@@ -66,7 +72,8 @@ image::png/cd-runnable.png[align=center]
 * Anonymous function (unnamed)
 * format: `(arguments) -&gt; (body)`
 * Improve code conciseness and permit to handle operations as objects
-* Examples:
+
+.Examples:
 [source,java]
 ----
 (int a, int b) -> {  return a + b; }
@@ -80,9 +87,8 @@ image::png/cd-runnable.png[align=center]
 
 ----
 
-'''
 
-=== Java Collection Frameworks Example
+== Java Collection Frameworks Example
 
 [source,java]
 ----
@@ -95,12 +101,10 @@ tags.forEach((String each) -> {System.out.println(each);});
 tags.forEach(each -> System.out.println(each));
 //or
 tags.forEach(System.out::println)
-
 ----
 
-'''
 
-=== The `Macro` class
+== The `Macro` class
 
 [source,java]
 ----
@@ -123,9 +127,8 @@ public class Macro {
 
 ----
 
-'''
 
-=== Adding commands to a macro
+== Adding commands to a macro
 
 [source,java]
 ----
@@ -145,3 +148,6 @@ macro.addCommand(editor::open);
 
 macro.run();
 ----
+
+[.impact]
+== link:../..[Back to main presentation]

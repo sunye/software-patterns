@@ -1,6 +1,20 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
 = Decorator
 
-=== [Gamma et al. 95]
+Gamma et al. 95
 
 '''
 
@@ -20,7 +34,7 @@ Decorators provide a flexible alternative to subclassing for extending functiona
 
 * Occasionally, we want to add a behavior only to certain objects of a class.
 
-image::png/decorator-example.png[align=center]
+image::decorator-example.png[align=center]
 
 [Gamma 95]
 
@@ -28,13 +42,13 @@ image::png/decorator-example.png[align=center]
 
 == Motivation - Example (1/2)
 
-image::png/decorator-classes.png[align=center]
+image::decorator-classes.png[align=center]
 
 '''
 
 == Motivation - Example (2/2)
 
-image::png/decorator-instances.png[align=center]
+image::decorator-instances.png[align=center]
 
 '''
 
@@ -62,7 +76,7 @@ Or a class definition may be hidden or otherwise unavailable for subclassing.
 
 == Structure
 
-image::png/decorator-structure.png[align=center]
+image::decorator-structure.png[align=center]
 
 * */Component*: the object we want to add behavior to
 * */Decorator*: the object that adds behavior to the component.

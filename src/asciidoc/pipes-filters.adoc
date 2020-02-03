@@ -1,18 +1,15 @@
 
 = Pipes and Filters
 
-== Architectural Pattern
+Architectural Pattern
 
-=== [Bushmann 96]
-
-—-
+Bushmann 96
 
 == Context
 
 * When processing a data stream, the processing of each step is performed by a filter. Filters are connected by pipes that transfer data.
 * The different filter combinations generate different data streams processing.
 
-—-
 
 == Context
 
@@ -36,7 +33,7 @@
 
 == Example
 
-image::png/pipes-and-filters-example.png[align=center]
+image::pipes-and-filters-example.png[align=center]
 <!-- .element: style="width: 600px;"-->
 
 —-

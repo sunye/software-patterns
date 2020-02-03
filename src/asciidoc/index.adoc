@@ -25,12 +25,13 @@ This work is licensed under a http://creativecommons.org/licenses/by-nc/4.0/[Cre
 image:https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons License,link=http://creativecommons.org/licenses/by-nc/4.0/]
 
 
+== UML
 
-== Contents
+* link:collaboration.html[UML Collaborations]
 
-[.columns]
---
-[.col-6]
+== Contents (1/2)
+
+
 .Essential patterns:
 * link:composite.html[Composite]
 * link:strategy.html[Strategy]
@@ -42,21 +43,30 @@ image:https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Licen
 * link:facade.html[Façade]
 * Null Object.
 
+== Contents (2/2)
+
+[.columns]
+--
 [.col-6]
-.Design Patterns:
-* Decorator
-* DTO
+****
+.More Design Patterns:
+* link:adapter.html[Adapter]
+* link:decorator.html[Decorator]
+* link:decorator.html[DTO]
 
 .Concurrency Patterns:
-* Reactor
-* Message Queueing
+* link:reactor.html[Reactor]
+* link:message-queueing.html[Message Queueing]
+****
 
+[.col-6]
 .Architectural Patterns:
-* Broker
-* Layers
-* Pipes and Filters
-* Reliability Patterns
-* Watchdog
+* link:broker.html[Broker]
+* link:layers.html[Layers]
+* link:pipes-filter[Pipes and Filters]
+
+.Reliability Patterns
+* link:watchdog.html[Watchdog]
 --
 
 == References
@@ -64,20 +74,27 @@ image:https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Licen
 * « Software Patterns ». James Coplien. SIGS Books. New York, 1996.
 * « Smalltalk Patterns: Best Practices ». Kent Beck. Prentice Hall, 1997, 256 pp., ISBN 0-13-476904-X.
 * « Design Patterns: Elements of Reusable Object-Oriented Software ». Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994.
-'''
+
+[%notitle]
+== References
 * The « Pattern Languages of Program Design » series:
 * Coplien &amp; Schmidt
 * Vlissides, Coplien, &amp; Kerth
 * Martin, Riehle, Buschmann
 * Harrison, Foote, Rohnert
-'''
+
+[%notitle]
+== References
+
 * «Introduction to Patterns and Frameworks.» Dr. David L. Levine and Douglas C. Schmidt. Department of Computer Science Washington University, St. Louis.
 * «Head First Design Patterns: A Brain-Friendly Guide». Bert Bates, Kathy Sierra, Eric Freeman, Elisabeth Robson. O'Reilly Media, June 2009.
 * «Patterns of Enterprise Application Architecture». Martin Fowler. Addison-Wesley Professional, 2002.
-'''
+[%notitle]
+== References
+
 * «Patterns Oriented Software Architecture: A System of Patterns». Frank Bushmann, Regine Meunier, Hans Rohnert, Peter Sommerlad, Michael Stahl. John Wiley &amp; Sons, 1996.
 * «Real-Time Design Patterns : Robust Scalable Architecture for Real-Time Systems». Bruce Powel Douglass. Addison Wesley, September 2002.
-'''
+
 
 == Web Sites
 

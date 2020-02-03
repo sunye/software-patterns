@@ -1,49 +1,61 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
 = Observer
 
-=== [Gamma et al. 95]
+Gamma et al. 95
 
-'''
 
 == Intent
 
 * An observer defines a dependency relationship between objects so that, *when the state of an object changes*, all its dependents are automatically _notified and updated_.
-'''
+
 
 == Motivation
 
 * A frequent side effect of partitioning a system into a collection of cooperating classes is the need to *maintain consistency* between interconnected objects.
 * We don't want consistency to be achieved by closely linked classes, because this would reduce their reusability
-'''
+
 
 == Motivation Example
 
-image::png/observer-example.png[align=center]
+image::observer-example.png[align=center]
 
-'''
 
 == Applicability
 
 * Use the _Observer_ pattern when:
 * When a concept has two different and dependent aspects (e.g. interface and business data),
 * The encapsulation of these aspects in separate classes allows them to vary and be reused independently.
-'''
 
 == Structure
 
-image::png/observer-structure.png[align=center]
+image::observer-structure.png[align=center]
 
-'''
 
 == Consequences
 
 * The _subject_ does not know any detail about its _observers_ (nor their quantity)
 * *Unexpected updates*: it is hard to know the actual cost of an update (ie. what happens when `update` is called?)
-'''
+
+
+== Consequences (Cont.)
 * New observers can be added without changing the subject nor the other observers.
 * _Abstract coupling_ between the subject and the observers:
 * The subject is not interested in the observer class,
 * A subject and an observer can belong to different levels of a system (see the _Proxy_ pattern).
-'''
+
 
 == Implementation Trade-offs
 
@@ -51,23 +63,25 @@ image::png/observer-structure.png[align=center]
 * Observation of more than one _subject_,
 * Different ways to trigger the notification (*subject*, customer),
 * _Subject destruction management_: should observers be destroyed when the subject is destroyed? or simply notified?
-'''
+
+== Implementation Trade-offs (Cont.)
+
 * Different notification protocols:
 * Two main possibilities:
 ** Either *Push* (the _observer_ receive information about the change that occurred and can use it directly)
 ** Or *Pull* (the _observer_ only knows that something changed, and then needs to discover by itself what changed)
 * Observation of certain aspects of the subject (selective notification), ie. possibility to *subscribe* to specific changes in the subject
-'''
+
+== Implementation Trade-offs (Cont.)
 * Encapsulation of the complex semantics of updating:
 * if an operation modifies different subjects, it can be better to notify observers only at the end,
 * use a *change manager* (see next slide).
-'''
+
 
 == Change Manager
 
-image::png/change-manager.png[align=center]
+image::change-manager.png[align=center]
 
-'''
 
 == Author and Date
 

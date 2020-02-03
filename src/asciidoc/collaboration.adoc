@@ -1,33 +1,42 @@
-= UML Collaborations
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
 
-—-
+= UML Collaborations
 
 == Goals
 
 * Specify the structure of a set of elements (or roles) that realize a common task.
 * Represent the structure of a design pattern.
 
-—-
 
 == Notation
 
 * *Collaboration Role*: role of a class that participates to a collaboration.
 * *Connector*: link allowing communication between two classes.
 
-image::png/uml-collaboration.png[align=center]
+.Collaboration
+image::uml-collaboration.png[align=center,width=800px]
 
-—-
 
 == Alternative Notation
 
 * Features defined by class roles must be owned by the classes playing those roles.
 
-image::png/uml-collaboration-alternate.png[align=center]
-
-—-
+.Collaboration
+image::uml-collaboration-alternate.png[align=center,width=800px]
 
 == Collaboration Usage
 
-* Collaboration occurrence.
-
-image::png/uml-collaboration-usage.png[align=center]
+.Collaboration occurrence.
+image::uml-collaboration-usage.png[align=center,width=800px]

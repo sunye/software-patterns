@@ -1,10 +1,22 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
 = Reactor
 
-== Concurrency Pattern
+Concurrency Pattern
 
-=== [Schmidt95]
-
-—-
+Schmidt95
 
 == Intent
 
@@ -42,7 +54,7 @@ Each service in an application may consist of several methods and is represented
 
 == Structure
 
-image::png/reactor-structure.png[align=center]
+image::reactor-structure.png[align=center]
 
 note:
 

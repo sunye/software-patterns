@@ -1,10 +1,23 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
 = Broker
 
-== Architectural Pattern
+Architectural Pattern
 
-=== [Douglass 02]
+Douglass'02
 
-'''
 
 == Intent
 
@@ -27,10 +40,8 @@
 
 == Structure
 
-image::png/broker.png[align=center]
-<!-- .element: style="width: 800px;"-->
+image::broker.png[align=center,width=800px]
 
-—-
 
 == Consequences
 

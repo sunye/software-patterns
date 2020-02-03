@@ -1,20 +1,20 @@
 = Message Queueing
 
-== Concurrency Pattern
+Concurrency Pattern
 
-=== [Douglass 2002]
+Douglass'2002
 
-—-
+
 
 == Intent
 
 * Provide a simple mechanism for information exchange between threads.
 * Avoid race conditions.
 
-note:
+[.notes]
+--
 A race condition is an undesirable situation that occurs when a device or system attempts to perform two or more operations at the same time, but because of the nature of the device or system, the operations must be done in the proper sequence in order to be done correctly.
-
-—-
+--
 
 == Context
 
@@ -23,13 +23,11 @@ A race condition is an undesirable situation that occurs when a device or system
 * synchronize to exchange informations.
 * avoid race condition situations during information exchange.
 
-—-
 
 == Structure
 
-image::png/message-queueing-structure.png[align=center]
+image::message-queueing-structure.png[align=center]
 
-—-
 
 == Consequences
 

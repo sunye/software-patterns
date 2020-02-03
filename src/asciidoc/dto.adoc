@@ -1,8 +1,21 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
 = DTO - Data Transfer Object
 
-=== [Fowler 2002]
+Fowler 2002
 
-—-
 
 == Problems
 
@@ -23,7 +36,7 @@ Créer un DTO qui contient toutes les données nécessaires à l’appel distant
 
 == Structure
 
-image::png/dto-structure.png[align=center]
+image::dto-structure.png[align=center]
 
 —-
 

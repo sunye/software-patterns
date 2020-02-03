@@ -1,22 +1,30 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
 = Watchdog
 
-== Reliability Pattern
+Reliability Pattern
 
-=== [Douglass 2002]
-
-—-
+Douglass 2002
 
 == Intent
 
 * Ensure that a time-dependent process works correctly.
 
-—-
-
 == Structure
 
-image::png/watchdog-structure.png[align=center]
-
-—-
+image::watchdog-structure.png[align=center]
 
 == Consequences
 

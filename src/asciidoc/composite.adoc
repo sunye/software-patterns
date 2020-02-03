@@ -1,14 +1,25 @@
-= Composite
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
 
-=== [Gamma et al. 95]
+= _Composite_
 
-'''
+Gamma et al. 95
 
 == Intent
 
 * Compose objects into tree structures to represent part-whole hierarchies.
 * Let clients treat individual objects and compositions of objects uniformly.
-'''
 
 == Motivation
 
@@ -18,26 +29,24 @@
 
 == Motivation - example
 
-image::png/composite-example.png[align=center]
+image::composite-example.png[align=center]
 
-'''
 
 == Motivation - example
 
-image::png/composite-instances.png[align=center]
+image::composite-instances.png[align=center]
 
-'''
 
 == Applicability
 
 * Use the Composite pattern when:
 * you want to represent _part-whole_ hierarchies of objects.
 * you want clients *to be able to ignore the difference between compositions of objects and individual objects*. Clients will treat all objects in the composite structure uniformly.
-'''
+
 
 == Structure
 
-image::png/composite-structure.png[align=center]
+image::composite-structure.png[align=center]
 
 '''
 
@@ -48,10 +57,10 @@ image::png/composite-structure.png[align=center]
 * It is easy to add new components.
 * The solution is sometimes too general (composite accepts any component).
 
-note:
+[.notes]
+--
 Clients are simplified, since they don’t have to deal with 2 different structures. 
-
-'''
+--
 
 == Implementation Tradeoffs
 
@@ -66,18 +75,20 @@ Clients are simplified, since they don’t have to deal with 2 different structu
 == Author and Date
 
 * Design Patterns: Elements of Reusable Object-Oriented Software. Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994.
-'''
+
 
 == More Examples
 
-'''
 
 === java.awt.Container
 
-image::png/cd-container.png[align=center]
+image::cd-container.png[align=center]
 
-'''
 
-== Files and Folders
 
-image::png/cd-file.png[align=center]
+=== Files and Folders
+
+image::cd-file.png[align=center]
+
+[.impact]
+== link:../..[Back]

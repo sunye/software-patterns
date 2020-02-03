@@ -1,14 +1,26 @@
-= Strategy
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
 
-=== [Gamma et al. 95]
+= _Strategy_
 
-'''
+Gamma et al. 95
 
 == Intent
 
 * Define a family of algorithms, encapsulate each one, and make them interchangeable.
 * Strategy lets the algorithm vary independently from clients that use it.
-'''
+
 
 == Context
 
@@ -18,35 +30,32 @@
 * an algorithm uses properties that clients should not access.
 * a class defines many behaviors, which appear as multiple conditional statements in its operations.
 
-note:
+[.notes]
+--
 Use the Strategy pattern when:
 - many related classes differ only in their behavior. Strategies provide a way to configure a class with one of many behaviors.
 - you need different variants of an algorithm. For example, you might define algorithms reflecting different space/time trade-offs. Strategies can be used when these variants are implemented as a class hierarchy of algorithms [HO87].
 - an algorithm uses data that clients shouldn't know about. Use the Strategy pattern to avoid exposing complex, algorithm-specific data structures.
 - a class defines many behaviors, and these appear as multiple conditional statements in its operations. Instead of many conditionals, move related conditional branches into their own Strategy class.
-
-'''
+--
 
 == Motivation Example
 
 * A sorted list, with different sort algorithms.
 * The sort algorithm may be replaced at runtime.
-'''
 
 == Motivation Example
 
-image::png/strategy-example.png[align=center]
+image::strategy-example.png[align=center]
 
-'''
 
 == Structure
 
-image::png/strategy-structure.png[align=center]
+image::strategy-structure.png[align=center]
 
 * Strategy defines an interface for a family of algorithms.
 * Each concrete strategy implements a different algorithm
 * The context defines the current algorithm and provides property access to algorithms.
-'''
 
 == Consequences
 
@@ -57,7 +66,7 @@ image::png/strategy-structure.png[align=center]
 * A client must understand how Strategies differ before it can select the appropriate one.
 * Communication overhead between Strategy and Context.
 * Object proliferation.
-'''
+
 
 == Implementation Tradeoffs
 
@@ -70,18 +79,21 @@ image::png/strategy-structure.png[align=center]
 == Author and Date
 
 * Design Patterns: Elements of Reusable Object-Oriented Software. Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994.
-'''
 
+
+[.impact]
 == More Examples
 
-'''
 
-=== java.util.Comparator
 
-image::png/cd-comparator.png[align=center]
+== java.util.Comparator
 
-'''
+image::cd-comparator.png[align=center]
 
-=== javax.servlet.http.HttpServlet
 
-image::png/cd-httpservlet.png[align=center]
+== javax.servlet.http.HttpServlet
+
+image::cd-httpservlet.png[align=center]
+
+[.impact]
+== link:../..[Back to main presentation]

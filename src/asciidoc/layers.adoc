@@ -1,8 +1,8 @@
 = Layers
 
-== Architectural Pattern
+Architectural Pattern
 
-=== [Bushmann 96]
+Bushmann 96
 
 —-
 
@@ -13,7 +13,6 @@
 * It is possible to define stable interfaces between layers
 * Layers may be added or changed over time
 
-—-
 
 == Solution
 
@@ -30,7 +29,7 @@
 
 == Example
 
-image::png/layers.png[align=center]
+image::layers.png[align=center]
 <!-- .element: style="width: 600px;"-->
 
 note:

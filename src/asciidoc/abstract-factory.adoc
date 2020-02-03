@@ -1,26 +1,38 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
 = Abstract Factory
 
-=== [Gamma et al. 95]
+Gamma et al. 95
 
-'''
 
 == Intent
 
 * Provide an interface for creating interrelated object families, without specifying their concrete classes.
-'''
+
 
 == Motivation
 
 * Consider, for instance, an application that runs on different graphic systems (e.g. Motif, Presentation Manager)
 * Each graphic element (window, button, etc.) must be created differently, depending on the system used.
 * To do this, an abstract class is used to create the graphic elements
-'''
+
 
 == Motivation - example
 
-image::png/abstract-factory-example.png[align=center]
+image::abstract-factory-example.png[align=center]
 
-'''
 
 == Applicability
 
@@ -35,9 +47,9 @@ image::png/abstract-factory-example.png[align=center]
 
 == Structure
 
-image::png/abstract-factory-structure.png[align=center]
+image::abstract-factory-structure.png[align=center]
 
-'''
+
 
 == Consequences
 
@@ -45,14 +57,14 @@ image::png/abstract-factory-structure.png[align=center]
 * Switching between product groups becomes simple
 * The consistency within a product family is enhanced
 * It is difficult to add new product families.
-'''
+
 
 == Implementation Tradeoffs
 
 * Factories are _singletons_
 * Factories define an interface, which can be implemented by a _prototype_ or by a _factory method_
 * Definition of extensible factories
-'''
+
 
 == Author and Date
 
