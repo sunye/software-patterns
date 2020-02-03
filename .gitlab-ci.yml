@@ -1,21 +1,24 @@
-image: node:13
+image: docker-registry.univ-nantes.fr/sunye-g/docker-asciidoctor-revealjs
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-  - node_modules/
-
-before_script:
-  - npm install
-  - npm run bower
+stages:
+  - build
+  - deploy
+  
+build:
+  stage: build
+  script:
+   - bash /home/compile.sh
+  artifacts:
+    paths:
+      - target
 
 pages:
   stage: deploy
   script:
-  - npm run dist
-  - mv dist public
+   - mkdir -p public
+   - rsync -r target/site/ public
   artifacts:
     paths:
-    - public
+      - public
   only:
-  - master
+    - master

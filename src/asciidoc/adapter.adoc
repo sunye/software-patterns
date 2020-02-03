@@ -1,0 +1,89 @@
+= _Adapter_
+
+=== [Gamma et al. 95]
+
+'''
+
+== Intent
+
+* An *adapter* converts the interface from one class to another in accordance with the client's expectations.
+'''
+
+== Motivation
+
+* How can a class be reused that does not have an interface that a client requires?
+* How can classes that have incompatible interfaces work together?
+* How to provide an alternative interface for a class?
+'''
+
+== Motivation Example
+
+image::png/adapter-example.png[align=center]
+
+'''
+
+== Structure of the _object adapter_ pattern
+
+image::svg/object-adapter.svg[] <!-- .element width="60%" -->
+
+'''
+
+== Consequences
+
+* Respects the _Single Responsibility Principle_ and the _Open/Closed Principle_
+* _Increases the overall complexity of the code_
+
+note:
+
+* _Single Responsibility Principle_. You can separate the interface or data conversion code from the primary business logic of the program.
+* _Open/Closed Principle_. You can introduce new types of adapters into the program without breaking the existing client code, as long as they work with the adapters through the client interface.
+* _The overall complexity of the code increases_ because you need to introduce a set of new interfaces and classes. Sometimes it’s simpler just to change the service class so that it matches the rest of your code.
+'''
+
+== _Class_ and _object_ adapters
+
+There are two main variants of the adapter pattern:
+
+* The *object adapter* uses a _reference_ to the class that gets adapted, which means at runtime that there is one adapter object and one adaptee object.
+* The *class adapter* uses an _inheritance_ to the class that gets adapted, which means at runtime that there is a single object.
+
+The previous slides have only presented the most common variant, ie. the _object adapter_.
+
+'''
+
+== Structure of the _class adapter_ pattern
+
+image::svg/class-adapter.svg[] <!-- .element width="60%" -->
+
+'''
+
+== Implementation tradeoffs
+
+Class and object adapters have different trade-offs.
+
+* A *class adapter*:
+* adapts the _Adaptee_ to the _Target_ by committing to a concrete _Adaptee_ class.
+ As a consequence, a class adapter won’t work when we want to adapt a class and all its subclasses.
+* lets the _Adapter_ override some of the _Adaptee_’s behavior, since _Adapter_ is a subclass of _Adaptee_.
+* introduces only one object, and no additional pointer indirection is needed to get to the _Adaptee_.
+'''
+* An *object adapter*:
+
+* lets a single _Adapter_ work with many *Adaptee*s—that is, the _Adaptee_ itself and all of its subclasses (if any).
+ The _Adapter_ can also add functionality to all _Adaptees_ at once.
+
+* makes it harder to override the _Adaptee_ behavior.
+ It will require subclassing _Adaptee_ and making _Adapter_ refer to the subclass rather than the _Adaptee_ itself.
+'''
+
+== Author and Date
+
+* Design Patterns: Elements of Reusable Object-Oriented Software. Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994.
+'''
+
+== More Examples
+
+* `java.util.Arrays#asList()`
+* `java.util.Collections#list()`
+* `java.util.Collections#enumeration()`
+* `javax.xml.bind.annotation.adapters.XML*Adapter*`

@@ -1,0 +1,83 @@
+= Composite
+
+=== [Gamma et al. 95]
+
+'''
+
+== Intent
+
+* Compose objects into tree structures to represent part-whole hierarchies.
+* Let clients treat individual objects and compositions of objects uniformly.
+'''
+
+== Motivation
+
+* Occasionally, some applications (e.g. graphic editor) need to deal with primitive objects and container objects, i.e., objects containing other objects.
+* Clients want to treat identically primitive and container objects.
+'''
+
+== Motivation - example
+
+image::png/composite-example.png[align=center]
+
+'''
+
+== Motivation - example
+
+image::png/composite-instances.png[align=center]
+
+'''
+
+== Applicability
+
+* Use the Composite pattern when:
+* you want to represent _part-whole_ hierarchies of objects.
+* you want clients *to be able to ignore the difference between compositions of objects and individual objects*. Clients will treat all objects in the composite structure uniformly.
+'''
+
+== Structure
+
+image::png/composite-structure.png[align=center]
+
+'''
+
+== Consequences
+
+* Clients treat equally composite or atomic structures.
+* Clients are simplified.
+* It is easy to add new components.
+* The solution is sometimes too general (composite accepts any component).
+
+note:
+Clients are simplified, since they don’t have to deal with 2 different structures. 
+
+'''
+
+== Implementation Tradeoffs
+
+* *Explicit reference to the parent*: sometimes the _Component_ may need to know the _Composite_ that contains it (if any).
+* *Sharing components*: sometimes a _Component_ may be possessed by multiple _Composites_ − can influence the behavior or the destruction of _Composites_.
+* *Where to define operations to add/remove components?*:
+* _Component_ class? Possible error if not called on a _Composite_.
+* _Composite_ class? Need to type check beforehand.
+* *The Composite may contain a _cache_* to store information on the sum of components it contains.
+'''
+
+== Author and Date
+
+* Design Patterns: Elements of Reusable Object-Oriented Software. Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994.
+'''
+
+== More Examples
+
+'''
+
+=== java.awt.Container
+
+image::png/cd-container.png[align=center]
+
+'''
+
+== Files and Folders
+
+image::png/cd-file.png[align=center]

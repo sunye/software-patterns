@@ -1,0 +1,50 @@
+
+= Pipes and Filters
+
+== Architectural Pattern
+
+=== [Bushmann 96]
+
+—-
+
+== Context
+
+* When processing a data stream, the processing of each step is performed by a filter. Filters are connected by pipes that transfer data.
+* The different filter combinations generate different data streams processing.
+
+—-
+
+== Context
+
+* A data stream processing system that is naturally divided into stages.
+* We want to combine the steps.
+* The steps that are not adjacent do not share information.
+* We want the different steps to be performed on different processors.
+* The data structure used between the steps is normalized.
+
+—-
+
+== Solution
+
+* Separate the system in _Pipes_ and _Filters_:
+* Filters incrementally consume and provide data.
+* Filters may be parameterized (e.g., Unix filters).
+* The input is a data source (e.g., a file)
+* The sequence of filters, from the source down to the output, creates a processing pipeline.
+
+—-
+
+== Example
+
+image::png/pipes-and-filters-example.png[align=center]
+<!-- .element: style="width: 600px;"-->
+
+—-
+
+== Consequences
+
+* Intermediary files are no longer needed.
+* Filters may be replaced streigwhfordly.
+* Filter combining create different results (long term utility).
+* If a standard data stream format is used, filters can be developed independently.
+* Incremental filters allow parallelism.

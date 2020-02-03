@@ -1,0 +1,40 @@
+= Broker
+
+== Architectural Pattern
+
+=== [Douglass 02]
+
+'''
+
+== Intent
+
+* Support a symmetric distribution architecture (as for dynamic load balancing).
+* Allow objects to find each other without knowing their locations a priori (at compiling time).
+
+—-
+
+== Solution
+
+* Add a broker as an object repository, such that when servers run, they register with the broker; when clients need to access a server, they request the location of the server from the broker.
+
+—-
+
+== Motivation
+
+* The broker is a more elaborated version of the Proxy pattern, which separates clients and servers.
+
+—-
+
+== Structure
+
+image::png/broker.png[align=center]
+<!-- .element: style="width: 800px;"-->
+
+—-
+
+== Consequences
+
+* Server location is only known when connecting to the broker.
+* The broker can use a Watchdog to ensure the integrity of the system.
+* Good support for symmetric architectures
+* Good commercial support with CORBA
