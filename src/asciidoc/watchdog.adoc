@@ -30,3 +30,6 @@ image::watchdog-structure.png[align=center]
 
 * Too simple to be used alone in a critical system.
 * Well-suited for detecting time failures and deadlocks.
+
+[.impact]
+== link:../..[Back to main presentation]

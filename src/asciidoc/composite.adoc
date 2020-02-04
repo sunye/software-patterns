@@ -25,30 +25,46 @@ Gamma et al. 95
 
 * Occasionally, some applications (e.g. graphic editor) need to deal with primitive objects and container objects, i.e., objects containing other objects.
 * Clients want to treat identically primitive and container objects.
-'''
 
 == Motivation - example
 
 image::composite-example.png[align=center]
 
-
 == Motivation - example
 
 image::composite-instances.png[align=center]
 
+== Motivation - example
+
+[plantuml, sd-composite-motivation, png, align=center]
+....
+scale 1200 width
+hide footbox
+skinparam monochrome true
+
+boundary Client
+Client -> "p1:Picture" : display()
+"p1:Picture" -> "p2:Picture" : display()
+"p2:Picture" -> ":Text" : display()
+"p2:Picture" -> "l2:Line" : display()
+"p2:Picture" -> "r2:Rectangle" : display()
+"p1:Picture" -> "l1:Line" : display()
+"p1:Picture" -> "r1Rectangle" : display()
+
+....
 
 == Applicability
 
-* Use the Composite pattern when:
+.Use the Composite pattern when:
 * you want to represent _part-whole_ hierarchies of objects.
-* you want clients *to be able to ignore the difference between compositions of objects and individual objects*. Clients will treat all objects in the composite structure uniformly.
+* you want clients *to be able to ignore the difference between compositions of objects and individual objects*.
+** Clients will treat all objects in the composite structure uniformly.
 
 
 == Structure
 
 image::composite-structure.png[align=center]
 
-'''
 
 == Consequences
 
@@ -66,29 +82,119 @@ Clients are simplified, since they don’t have to deal with 2 different structu
 
 * *Explicit reference to the parent*: sometimes the _Component_ may need to know the _Composite_ that contains it (if any).
 * *Sharing components*: sometimes a _Component_ may be possessed by multiple _Composites_ − can influence the behavior or the destruction of _Composites_.
+
+== Implementation Tradeoffs (Cont.)
+
+[.block]
 * *Where to define operations to add/remove components?*:
-* _Component_ class? Possible error if not called on a _Composite_.
-* _Composite_ class? Need to type check beforehand.
+
+[.columns]
+--
+[.col-6]
+****
+.In the _Component_ class?
+* Possible error if not called on a _Composite_.
+
+[plantuml, cd-composite-tradeoff-a, png, align=center, width=400px]
+....
+scale 400 width
+skinparam monochrome true
+hide circle
+
+class "/Component" as component {
+    add(Component)
+    remove(Component)
+}
+class "/Composite" as composite
+class "/Leaf" as leaf
+
+component <|-- composite
+component <|-- leaf
+composite o-- "*" component
+....
+****
+
+[.col-6]
+****
+.In the _Composite_ class?
+* Need to type check beforehand.
+
+[plantuml, cd-composite-tradeoff-b, png, align=center, width=400px]
+....
+scale 400 width
+skinparam monochrome true
+hide circle
+
+class "/Component" as component
+class "/Composite" as composite {
+    add(Component)
+    remove(Component)
+}
+class "/Leaf" as leaf
+
+component <|-- composite
+component <|-- leaf
+composite o-- "*" component
+....
+****
+--
+
+== Implementation Tradeoffs (Cont.)
+
 * *The Composite may contain a _cache_* to store information on the sum of components it contains.
-'''
+
+.Composite as property cache
+[plantuml, od-composite-cache, png, align=center, width=800px]
+....
+scale 800 width
+skinparam monochrome true
+
+object "__doc:Folder__" as doc {
+    size = 100
+}
+
+object "__resume:File__" as resume {
+    size = 10
+}
+
+object "__photo:File__" as photo {
+    size = 90
+}
+
+object "__scan:Folder__" as scan {
+    size = 40
+}
+
+object "__card:File__" as card {
+    size = 40
+}
+
+doc -- resume
+doc -- photo
+doc -- scan
+scan -- card
+....
 
 == Author and Date
 
 * Design Patterns: Elements of Reusable Object-Oriented Software. Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994.
 
 
+[.impact]
 == More Examples
 
 
-=== java.awt.Container
+== java.awt.Container
 
 image::cd-container.png[align=center]
 
-
-
-=== Files and Folders
+== Files and Folders
 
 image::cd-file.png[align=center]
 
 [.impact]
 == link:../..[Back]
+
+== Test diagram
+
+
