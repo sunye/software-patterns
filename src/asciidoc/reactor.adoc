@@ -22,20 +22,19 @@ Schmidt95
 
 * Handles service requests that are delivered concurrently to an application by one or more clients.
 
-note:
+[.notes]
+--
 The Reactor design pattern handles service requests that are
 delivered concurrently to an application by one or more
 clients.
 
-Each service in an application may consist of several methods and is represented by a separate event handler that is responsible for dispatching service-specific requests. Dispatching of event handlers is performed by an initiation dispatcher, which manages the registered event handlers. Demultiplexing of service requests is performed by a synchronous event demultiplexer. 
-
-—-
+Each service in an application may consist of several methods and is represented by a separate event handler that is responsible for dispatching service-specific requests. Dispatching of event handlers is performed by an initiation dispatcher, which manages the registered event handlers. Demultiplexing of service requests is performed by a synchronous event demultiplexer.
+--
 
 == Context
 
 * A server application of a distributed system that receives concurrent events from one or more clients.
 
-—-
 
 == Forces
 
@@ -44,34 +43,29 @@ Each service in an application may consist of several methods and is represented
 * *Simplicity*: the server must be designed to simplify the use of different strategies of competition.
 * *Adaptability*: the creation of new services should not change the format of messages.
 
-—-
-
 == Solution
 
 * Use an event dispatcher as the system core.
 
-—-
 
 == Structure
 
-image::reactor-structure.png[align=center]
+image::reactor-structure.png[align=center,height=800px]
 
-note:
-
+[.notes]
+--
 Handlers - awt ActionListener
 select() - indique les handles qui ont des événements disponibles.
-
-—-
-
+--
 == Consequences
 
 * Non-preemptive
 * Hard to debug
 
-note:
+[.notes]
+--
 non-preemptive : ne peut pas bloquer, sinon il bloque tout le monde. simplifie la gestion des ressources
-
-—-
+--
 
 == Know uses
 
@@ -80,8 +74,12 @@ non-preemptive : ne peut pas bloquer, sinon il bloque tout le monde. simplifie l
 * CORBA ORB
 * Apache XML Cocoon
 
-note:
-
+[.notes]
+--
 InterViews - C++ Graphical Interface Toolkit
 ACE - Adaptive Communication Environment
 Cocoon - web application framework
+--
+
+[.impact]
+== link:../..[Back to main presentation]

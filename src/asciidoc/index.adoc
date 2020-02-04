@@ -22,7 +22,7 @@ https://sunye-g.univ-nantes.io
 
 This work is licensed under a http://creativecommons.org/licenses/by-nc/4.0/[Creative Commons Attribution-NonCommercial 4.0 International License].
 
-image:https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons License,link=http://creativecommons.org/licenses/by-nc/4.0/]
+image::https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons License,link=http://creativecommons.org/licenses/by-nc/4.0/]
 
 
 == UML
@@ -52,7 +52,7 @@ image:https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Licen
 .More Design Patterns:
 * link:adapter.html[Adapter]
 * link:decorator.html[Decorator]
-* link:decorator.html[DTO]
+* link:dto.html[DTO]
 
 .Concurrency Patterns:
 * link:reactor.html[Reactor]
@@ -63,7 +63,7 @@ image:https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Licen
 .Architectural Patterns:
 * link:broker.html[Broker]
 * link:layers.html[Layers]
-* link:pipes-filter[Pipes and Filters]
+* link:pipes-filters.html[Pipes and Filters]
 
 .Reliability Patterns
 * link:watchdog.html[Watchdog]

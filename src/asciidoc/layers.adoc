@@ -1,10 +1,23 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
 = Layers
 
 Architectural Pattern
 
 Bushmann 96
 
-—-
 
 == Context
 
@@ -25,17 +38,15 @@ Bushmann 96
 * Specify interfaces for each layer.
 * Handle errors at lowest layer possible.
 
-—-
 
 == Example
 
-image::layers.png[align=center]
-<!-- .element: style="width: 600px;"-->
+image::layers.png[align=center,width=600px]
 
-note:
+[.notes]
+--
 - Other example: Java !
-
-—-
+--
 
 == Advantages
 
@@ -45,7 +56,6 @@ note:
 * Programmers and users can ignore other layers
 * Different programming teams can handle each layer
 
-—-
 
 == Limitations
 
@@ -53,3 +63,6 @@ note:
 * Lower efficiency of data transfer
 * Difﬁcult to choose granularity of layers
 * Difﬁcult to understand the entire system
+
+[.impact]
+== link:../..[Back to main presentation]

@@ -12,7 +12,9 @@
 :includedir: includes
 :sectids!:
 
-= DTO - Data Transfer Object
+= _DTO_
+
+Data Transfer Object
 
 Fowler 2002
 
@@ -23,22 +25,18 @@ Fowler 2002
 * Network performance: latency and throughput.
 * Remote procedures return at most one parameter.
 
-—-
-
 == Solution
 
 * Create a class that contains all parameters of a remote procedure call.
 
-note:
+[.notes]
+--
 Créer un DTO qui contient toutes les données nécessaires à l’appel distant.Modifier la signature de la méthode distante pour qu’elle accepte le DTO en tant que paramètre unique et pour qu’elle renvoie un paramètre DTO unique au client.Une fois que l’application appelante a reçu le DTO et l’a stocké en tant qu’objet local, l’application peut émettre une série d’appels de procédures vers le DTO sans générer la surcharge due à l’émission des appels distants.Martin Fowler décrit ce modèle dans Patterns of Enterprise Application Architecture (Modèles d'architecture pour les applications d'entreprise) [Fowler03].
-
-—-
+--
 
 == Structure
 
 image::dto-structure.png[align=center]
-
-—-
 
 == Consequences
 
@@ -46,15 +44,15 @@ image::dto-structure.png[align=center]
 * Performance.
 * Testability improvement.
 
-note:
+[.notes]
+--
 Avantages:
 - Réduction du nombre d’appels distants.En transmettant plus de données dans un seul appel distant, l’application peut réduire le nombre d’appels distants.
 - Amélioration des performances.Les appels distants ralentissent considérablement les applications.La réduction du nombre d’appels est l’un des meilleurs moyens d’améliorer les performances.Dans la plupart des situations, un appel distant transportant beaucoup de données prend pratiquement autant de temps qu’un appel qui en transporte peu.
 - Transparence des mécanismes internes. Le fait d’émettre et de recevoir davantage de données dans un seul appel masque plus efficacement les mécanismes internes d’une application distante derrière une interface à granularité grossière. C’est le facteur qui a le plus motivé l’élaboration du modèle Remote Facade [Fowler03].
 - Découverte d’objets métier. Dans certains cas, le fait de définir un DTO aide à découvrir des objets métier pertinents. Lorsque l’on crée des classes personnalisées servant de DTO, on remarque souvent des regroupements d’éléments qui sont présentés à un utilisateur ou à un autre système en tant qu’ensemble cohérent d’informations. En général, ces regroupements sont des prototypes très utiles pour les objets qui décrivent le domaine métier que doit gérer l’application.
 - Aptitude au test. L’encapsulation de tous les paramètres dans un objet sérialisable peut favoriser l’aptitude au test. Par exemple, on peut lire les DTO à partir d’un fichier XML et appeler des fonctions distantes pour le tester. De même, il est facile de sérialiser de nouveau les résultats en format XML et de comparer le document XML au résultat souhaité sans avoir à créer de longs scripts de comparaison.
-
-—-
+--
 
 == Consequences
 
@@ -62,8 +60,14 @@ Avantages:
 * Type conversions (additional processing is needed).
 * Additional code.
 
-note:
+[.notes]
+--
 Inconvénients:
 - Risque de multiplication du nombre de classes. Si vous choisissez d’utiliser des DTO fortement typés, vous devrez peut-être créer un (ou deux, en tenant compte de la valeur de retour) DTO pour chaque méthode distante. Même dans une interface à granularité grossière, cela peut induire un grand nombre de classes. Il peut devenir difficile d’en coder et gérer une telle quantité. La génération de code automatique peut palier en partie à ce problème.
 - Calculs supplémentaires. Le fait de convertir un format de données sur le serveur en flux d’octets transportable sur le réseau, puis à nouveau en format objet dans l’application cliente, peut induire une surcharge assez importante. En général, on agrège des données provenant de sources diverses dans un seul DTO sur le serveur. Pour améliorer l’efficacité des appels distants sur le réseau, il faut faire quelques calculs supplémentaires d’un côté ou de l’autre pour agréger et sérialiser les informations.
 - Codage supplémentaire. Le transfert de paramètres à une méthode peut être réalisé en une seule ligne. Le DTO demande d’instancier un nouvel objet et d’appeler des méthodes d’obtention et de réglage pour chaque paramètre. L’écriture de ce code peut être fastidieuse
+--
+
+[.impact]
+== link:../..[Back to main presentation]
+

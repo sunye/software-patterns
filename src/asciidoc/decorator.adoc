@@ -12,23 +12,20 @@
 :includedir: includes
 :sectids!:
 
-= Decorator
+= _Decorator_
 
 Gamma et al. 95
-
-'''
 
 == Intent
 
 * Dynamically add a behavior to an object.
 * Propose a flexible alternative to inheritance.
 
-note:
-
+[.notes]
+--
 Attach additional responsibilities to an object dynamically.
 Decorators provide a flexible alternative to subclassing for extending functionality 
-
-'''
+--
 
 == Motivation
 
@@ -36,9 +33,9 @@ Decorators provide a flexible alternative to subclassing for extending functiona
 
 image::decorator-example.png[align=center]
 
-[Gamma 95]
+[.small]
+Gamma'95
 
-'''
 
 == Motivation - Example (1/2)
 
@@ -50,7 +47,6 @@ image::decorator-classes.png[align=center]
 
 image::decorator-instances.png[align=center]
 
-'''
 
 == Applicability (1/2)
 
@@ -58,21 +54,21 @@ image::decorator-instances.png[align=center]
 * add a behavior to an object dynamically and transparently.
 * add a behavior that can be removed later.
 
-note:
+[.notes]
+--
 to add responsibilities to individual objects dynamically and transparently, that is, without affecting other objects.
 for responsibilities that can be withdrawn. 
-
-'''
+--
 
 == Applicability (2/2)
 
 * Use the decorator pattern when the creation of subclasses is impractical.
 
-note:
+[.notes]
+--
 Sometimes a large number of independent extensions are possible and would produce an explosion of subclasses to support every combination. +
 Or a class definition may be hidden or otherwise unavailable for subclassing. 
-
-'''
+--
 
 == Structure
 
@@ -80,7 +76,7 @@ image::decorator-structure.png[align=center]
 
 * */Component*: the object we want to add behavior to
 * */Decorator*: the object that adds behavior to the component.
-'''
+
 
 == Consequences
 
@@ -89,63 +85,59 @@ image::decorator-structure.png[align=center]
 * Components and decorators are not identical: comparison may not work as expected.
 * Explosion of small objects.
 
-note:
+[.notes]
+--
 - more flexible: one can add twice the same behavior!!!
 - Component classes REMAIN small.
-
-'''
+--
 
 == Implementation Tradeoffs
 
 * Interface conformance: components and decorators must implement the same interface.
 * Omission of the abstract Decorator class.
 * Lightweight component classes: since decorators specialize the component, the latter should have the less properties as possible.
-'''
+
 
 == Authors and Date
 
 * «Design Patterns: Elements of Reusable Object-Oriented Software.» Erich Gamma, Richard Helm,Ralph Johnson, and John Vlissides. Addison Wesley. October 1994.
-'''
 
+[.impact]
 == More Examples
 
-'''
 
-== Starbuzz Coffee
 
-image::patterns/starbuzz-problem.jpg[]
+== Starbuzz Coffee (1/3)
 
-[Bates et al. 2009]
-
-'''
-
-image::patterns/starbuzz-class-explosion.png[align=center]
+image::starbuzz-problem.jpg[align=center]
 
 [Bates et al. 2009]
 
-'''
+== Starbuzz Coffee (2/3)
 
-image::patterns/starbuzz-decorator.png[align=center]
+image::starbuzz-class-explosion.png[align=center]
 
 [Bates et al. 2009]
 
-—-
+== Starbuzz Coffee (3/3)
+
+image::starbuzz-decorator.png[align=center]
+
+[Bates et al. 2009]
 
 == Java I/O
 
-image::patterns/java-input-stream.png[align=center]
+image::java-input-stream.png[align=center]
 
 [source,java]
 ----
 InputStream is = new FileInputStream(file);
 DataInputStream dis = new DataInputStream(is);
 BufferedInputStream bis = new BufferedInputStream(dis);
-
 ----
 
-'''
 
-=== FilterInputStream.java
+== FilterInputStream.java
 
 [source,java]
 ----
@@ -161,14 +153,11 @@ public class FilterInputStream extends InputStream {
     }
 	
 	//(...)
-
 ----
-
-'''
 
 == Java Collections Framework
 
-image::patterns/java-list.png[align=center]
+image::java-list.png[align=center]
 
 [source,java]
 ----
@@ -178,4 +167,6 @@ List<String> readOnlyTags = Collections.unmodifiableList(tags);
 
 ----
 
-'''
+[.impact]
+== link:../..[Back to main presentation]
+

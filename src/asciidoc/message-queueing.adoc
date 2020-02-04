@@ -1,10 +1,22 @@
-= Message Queueing
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
+= _Message Queueing_
 
 Concurrency Pattern
 
 Douglass'2002
-
-
 
 == Intent
 
@@ -34,3 +46,6 @@ image::message-queueing-structure.png[align=center]
 * Information shared among threads is passed by value to the separate thread.
 * Simple mechanism used by most real-time systems.
 * Relatively heavy.
+
+[.impact]
+== link:../..[Back to main presentation]

@@ -1,3 +1,16 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
 
 = Pipes and Filters
 
@@ -19,8 +32,6 @@ Bushmann 96
 * We want the different steps to be performed on different processors.
 * The data structure used between the steps is normalized.
 
-—-
-
 == Solution
 
 * Separate the system in _Pipes_ and _Filters_:
@@ -29,14 +40,9 @@ Bushmann 96
 * The input is a data source (e.g., a file)
 * The sequence of filters, from the source down to the output, creates a processing pipeline.
 
-—-
-
 == Example
 
-image::pipes-and-filters-example.png[align=center]
-<!-- .element: style="width: 600px;"-->
-
-—-
+image::pipes-and-filters-example.png[align=center,width=600px]
 
 == Consequences
 
@@ -45,3 +51,6 @@ image::pipes-and-filters-example.png[align=center]
 * Filter combining create different results (long term utility).
 * If a standard data stream format is used, filters can be developed independently.
 * Incremental filters allow parallelism.
+
+[.impact]
+== link:../..[Back to main presentation]

@@ -193,8 +193,7 @@ image::cd-container.png[align=center]
 image::cd-file.png[align=center]
 
 [.impact]
-== link:../..[Back]
+== link:../..[Back to the main presentation]
 
-== Test diagram
 
 

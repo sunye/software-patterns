@@ -37,7 +37,6 @@ image::facade-example.png[align=center]
 * provide a simple interface for a component.
 * reduce dependency between clients and implementation classes.
 
-—-
 
 == Structure
 
