@@ -37,7 +37,7 @@ image::https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Lice
 * link:strategy.html[Strategy]
 * State
 * link:command.html[Command],
-* Iterator
+* link:iterator.html[Iterator]
 * link:proxy.html[Proxy]
 * Template Method,
 * link:facade.html[Façade]
@@ -60,6 +60,7 @@ image::https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Lice
 ****
 
 [.col-6]
+****
 .Architectural Patterns:
 * link:broker.html[Broker]
 * link:layers.html[Layers]
@@ -67,6 +68,7 @@ image::https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Lice
 
 .Reliability Patterns
 * link:watchdog.html[Watchdog]
+****
 --
 
 == References
@@ -89,6 +91,7 @@ image::https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Lice
 * «Introduction to Patterns and Frameworks.» Dr. David L. Levine and Douglas C. Schmidt. Department of Computer Science Washington University, St. Louis.
 * «Head First Design Patterns: A Brain-Friendly Guide». Bert Bates, Kathy Sierra, Eric Freeman, Elisabeth Robson. O'Reilly Media, June 2009.
 * «Patterns of Enterprise Application Architecture». Martin Fowler. Addison-Wesley Professional, 2002.
+
 [%notitle]
 == References
 

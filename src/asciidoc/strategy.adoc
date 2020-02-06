@@ -70,11 +70,11 @@ image::strategy-structure.png[align=center]
 
 == Implementation Tradeoffs
 
-* Defining the Strategy and Context interfaces.
+.Defining the Strategy and Context interfaces
 * The Strategy and Context interfaces must give a ConcreteStrategy efficient access to any data it needs from a context, and vice versa.
-* Strategies as template parameters.
+
+.Strategies as template parameters
 * In C++ templates can be used to configure a class with a strategy.
-'''
 
 == Author and Date
 

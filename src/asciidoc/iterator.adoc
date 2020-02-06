@@ -1,0 +1,319 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
+= _Iterator_
+
+Gamma et al. 95
+
+== Intent
+
+[quote]
+____
+Provide a way to traverse a collection of elements without exposing its underlying representation: array, linked list, tree, etc.
+____
+
+
+== Motivation
+
+* An aggregate object should give you a way to access its elements without exposing its internal structure.
+
+[.columns]
+--
+[.col-6]
+****
+.A Linked List
+image::linked-list.png[align=center]
+****
+
+[.col-6]
+****
+.A Tree
+image::tree.png[align=center]
+****
+--
+
+== Motivation (Cont.)
+
+* The collection structure should be independent from the way it is traversed.
+
+[.columns]
+--
+[.col-6]
+****
+.Deep-First Traversal
+image::deep-first.png[align=center,width=600px]
+****
+
+[.col-6]
+****
+.Breadth-First Traversal
+image::breadth-first.png[align=center,width=600px]
+****
+--
+
+
+== Solution
+
+* Move the collection traversal behavior into a separate class called _Iterator_.
+* All iterators should provide the same interface for accessing and traversing elements, regardless of the class of the collection object and the kind of traversal that is performed.
+
+.The Iterator Interface
+[plantuml, cd-iterator, png, align=center, width=400px]
+....
+scale 400 width
+skinparam monochrome true
+hide circle
+
+class "/Iterator" as iterator {
+   hasMore(): Boolean
+   next()
+}
+....
+
+[.notes]
+--
+* Iterator class defines an interface for accessing elements
+* It is responsible for keeping track of the current element
+* Generalize the iterator concept to support polymorphic iteration by generalizing iterators into an abstract iterator class that defines the common iteration interface
+--
+
+== Structure
+
+[plantuml, cd-iterator-structure, png, align=center, width=800px]
+....
+scale 800 width
+skinparam monochrome true
+hide circle
+
+class "/Client" as client
+
+class "/Iterator" as iterator {
+   /hasMore(): Boolean
+   /next()
+}
+
+
+class "/Aggregate" as aggregate {
+   /iterator(): Iterator
+}
+
+
+class "/ConcreteAggregate" as concreteAggregate {}
+
+
+class "/ConcreteIterator" as concreteIterator {}
+
+iterator <|-- concreteIterator
+aggregate <|-- concreteAggregate
+
+client --> iterator
+client --> aggregate
+aggregate .> iterator : "creates"
+
+....
+
+== Participants
+
+Iterator:: defines an interface for accessing and traversing elements
+
+ConcreteIterator:: implements the _Iterator_ interface and 
+keeps track of the current position in the traversal of the aggregate
+
+Aggregate:: defines an interface for creating an _Iterator_ object
+
+ConcreteAggregate:: creates and returns an instance of the proper _ConcreteIterator_
+
+== Consequences
+
+* It supports variations in the traversal of an _Aggregate_: you can use different ways of iterating by defining various concrete subclasses of _Iterator_ for your collection.
+* _Iterators_ simplify the _Aggregate_ interface
+* More than one traversal can be pending on an _Aggregate_
+
+== Usage
+
+* _Iterators_ are widely used in the Java Collection Framework (JFC)!
+
+.Iterator.java
+[source,java]
+----
+public interface Iterator<E> {
+    boolean hasNext();
+    E next();
+    default void remove() {
+        throw new UnsupportedOperationException("remove");
+    }
+    default void forEachRemaining(Consumer<? super E> action) {
+        Objects.requireNonNull(action);
+        while (hasNext())
+            action.accept(next());
+    }
+----
+
+== Usage (Cont.)
+
+.ListIterator.java
+[source,java]
+----
+public interface ListIterator<E> extends Iterator<E> {
+    boolean hasNext();
+    E next();
+    boolean hasPrevious();
+    E previous();
+    int nextIndex();
+    int previousIndex();
+    void remove();
+    void set(E e);
+    void add(E e);
+}
+----
+
+[.impact ]
+== Implementation Tradeoffs
+
+== Who Controls the Iteration? 
+
+- If it's the client: **External Iterator**
+- It it's the iterator: **Internal Iterator**
+
+[source,java]
+----
+// External:
+Iterator it = list.iterator(); 
+while (iterator.hasNext())
+   System.out.println(it.next());
+// Internal:
+list.stream().forEach(System.out::println);
+----
+
+== External e Internal Iterators
+
+.External iterators
+* more flexible: easy to compare two collections for equality  
+
+.Internal iterators
+* hard to implement on languages without anonymous functions or closures
+* easier to use
+
+
+== Who defines the Traversal Algorithm? 
+
+.The Aggregator
+* The _Iterator_ only stores the state of the iteration (it's called a cursor)
+* The _Client_ invokes the `next()` operation on the _Aggregate_, with the cursor as an argument
+* The `next()` operation changes the state of the cursor
+
+.The Iterator
+* Easy to use different iteration algorithms on the same _Aggregate_
+* Maybe easier to reuse the same algorithm on different _Aggregates_
+* The _Iterator_ might need to access the private variables of the _Aggregate_, 
+violating the encapsulation of the _Aggregate_.
+
+== How robust is the iterator? 
+
+[.block]
+What happens if the _Aggregate_ is modified when an _Iterator_ is traversing it?
+
+.Robust Iterators:
+* ensures that insertions and removals won't interfere with traversal, without copying the _Aggregate_
+* in most implementations, robust _Iterators_ are registered with the _Aggregate_:
+** on changes, the _Aggregate_ adjusts its _Iterators_
+
+== Robust Iterators in Java
+
+* Java Collections have a modification counter, called `modCount`
+* The counter is incremented after each add or removal
+* When created, _Iterators_ copy the counter
+* The _Iterator_ compares both counters before each iteration
+
+[plantuml, cd-robust-iterator, png, align=center, width=400px]
+....
+scale 400 width
+skinparam monochrome true
+hide circle
+
+object "__coll:Collection__" as coll {
+    modCount = 100
+}
+object "__it1:Iterator__" as it1 {
+    modCount = 100
+}
+object "__it2:Iterator__" as it2 {
+    modCount = 100
+}
+coll -- it1
+coll -- it2
+....
+
+
+== Additional Iterator operations. 
+
+Minimal _Iterator_ interface:: `First()`, `Next()`, `IsDone()`, and `CurrentItem()`.
+
+Other useful operations:: `Previous()` and `SkipTo()`
+
+[.notes]
+--
+* For example, ordered aggregates can have a Previous operation that positions the iterator to the previous element. 
+* A SkipTo operation is useful for sorted or indexed collections. SkipTo positions the iterator to an object matching specific criteria.
+--
+
+== Iterators may have privileged access. 
+
+In C++:: The _Iterator_ is a *friend* of its _Aggregate_
+
+In Java:: The _Iterator_ is an *inner class* of its _Aggregate_, which implements an external `Interface`.
+
+== Iterators for Composites. 
+
+* It's hard to implement an external _Iterator_ over recursive _Aggregates_,
+like the link:./composite.html[Composite] pattern.
+
+* Different traversal algorithms: Preorder, postorder, inorder, and breadth-first
+
+* Sometimes, it's easier to implement an internal _Iterator_, and perform recursive calls (the path is stored in the call stack)
+
+* If the nodes in a Composite have an interface for moving from a node to its siblings, parents, and children:  then a cursor-based _Iterator_ may offer a better alternative. 
+
+
+== Null Iterators. 
+
+* A  `NullIterator` is always done with traversal: operation `IsDone()` always evaluates to  true.
+
+* `NullIterators` are helpful for handling boundary conditions.
+
+* Useful for tree-structured aggregates.
+
+[plantuml, cd-composite-iterator, png, align=center, width=400px]
+....
+scale 400 width
+skinparam monochrome true
+hide circle
+
+class "/Component" as component {
+   iterator(): Iterator
+}
+class "/Composite" as composite {
+   iterator(): Iterator
+}
+class "/Leaf" as leaf {
+   iterator(): Iterator
+}
+
+component <|-- composite
+component <|-- leaf
+composite o-- "*" component
+....
+
+[.impact]
+== link:../..[Back to the main presentation]
