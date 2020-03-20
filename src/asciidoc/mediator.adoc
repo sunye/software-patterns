@@ -29,7 +29,7 @@ Gamma et al. 95
 
 == Motivation (2/4)
 
-[.columns]
+[.cols]
 --
 [.col-6]
 image::mediator-font-chooser.png[align=center,width=600px]

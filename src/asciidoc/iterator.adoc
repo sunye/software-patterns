@@ -28,7 +28,7 @@ ____
 
 * An aggregate object should give you a way to access its elements without exposing its internal structure.
 
-[.columns]
+[.cols]
 --
 [.col-6]
 ****
@@ -47,7 +47,7 @@ image::tree.png[align=center]
 
 * The collection structure should be independent from the way it is traversed.
 
-[.columns]
+[.cols]
 --
 [.col-6]
 ****

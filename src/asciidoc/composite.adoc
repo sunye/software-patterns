@@ -88,7 +88,7 @@ Clients are simplified, since they don’t have to deal with 2 different structu
 [.block]
 * *Where to define operations to add/remove components?*:
 
-[.columns]
+[.cols]
 --
 [.col-6]
 ****
