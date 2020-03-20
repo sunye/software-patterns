@@ -54,6 +54,7 @@ image::https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Lice
 * link:dto.html[DTO]
 * link:observer.html[Observer]
 * link:abstract-factory.html[Abstract Factory]
+* link:flyweight.html[Flyweight]
 
 .Concurrency Patterns:
 * link:reactor.html[Reactor]

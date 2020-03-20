@@ -1,0 +1,131 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
+= Flyweight
+
+Gamma et al. 95
+
+== Problème
+
+* On doit instancier un grand nombre de petits objets 
+* Trop gourmand au niveau de la mémoire
+
+.Exemples
+* Du texte contenant un grand nombre de caractères
+* Un jeu massivement multi-joueurs (les objets graphiques)
+* L'ADN
+
+== Objectif 
+
+[.block]
+Partager efficacement un grand nombre de petits objets
+
+. Fonctionnement :
+* Certaines données sont extraites du l'objet pour en minimiser le nombre d'instanciation
+
+.Exemple : l'ADN
+* Seuls 4 bases azotées créées (G, A, T, C)
+* Leur position est stockée en dehors (dans l'ADN)
+* Sinon explosion du nombre d'instances de bases azotées
+
+== Structure
+
+image::flyweight-structure.png[align=center,width=1000px]
+
+* *FabriquePoidsMouche*: créer des objets que quand nécessaire (sinon retourne l'objet déjà existant)
+* L'utilisation du patron dans le code client passe par la fabrique pour obtenir des instances
+
+== Structure (Cont.)
+
+image::flyweight-structure.png[align=center,width=1000px]
+
+* *PoidsMoucheConcret* ne contient pas certaines données
+* Elles lui seront passées en paramètres (étatExtrinsèque)
+* *PoidsMoucheConcretNonPartagé* : cas spécial de poids-mouche qui n'externalise pas ses données
+
+== Exemple
+
+image::flyweight-example.png[align=center,width=800px]
+
+* Exemple : un texte se compose de caractères
+* Externalisation de la position/police des caractères
+* 1 seul caractère pour 1 valeur (a, b, c, etc.)
+
+== Exemple en Java
+
+.Fabrique Caractères
+[source,java]
+--
+public final class FabriqueCaractere {
+  public static FabriqueCaractere INSTANCE = new FabriqueCaractere();
+
+  private Map<Integer, Caractere> mapCaracteres;
+
+  private FabriqueCaractere() {
+    mapCaracteres = new IdentityHashMap<Integer, Caractere>();
+  }
+
+
+  public Caractere ObtenirCaractere(char valeur) {
+    Caractere car = mapCaracteres.get(valeur);
+
+    if(car==null) {
+      car = new Caractere(valeur);
+      mapCaracteres.put((int)valeur, car);
+    }
+    return car;
+  }
+}
+--
+
+== Exemple en Java (Cont.)
+
+.Texte
+[source,java]
+--
+public class Texte {
+  protected List<Caractere> caracts;
+
+  public Texte() {
+    caracts = new ArrayList<Caractere>();
+  }
+
+  public void afficher(Graphics2D g) {
+    //...
+  }
+
+  public void ajouterCaractere(char valeur) {
+    caracts.add(FabriqueCaractere.INSTANCE.ObtenirCaractere(valeur));
+  }
+}
+--
+
+== Exemple en Java (Cont.)
+
+.Caractère
+[source,java]
+--
+public class Caractere {
+  protected char valeur;
+  //..
+
+  public Caractere(char valeur) {
+    this.valeur = valeur;
+  }
+
+  public void afficher(Graphics2D g, Point position) {
+    //...
+  }
+}
+--
