@@ -31,7 +31,7 @@ Gamma et al. 95
 
 == Motivation - example
 
-image::abstract-factory-example.png[align=center]
+image::abstract-factory-example.png[align=center,width=1200px]
 
 
 == Applicability

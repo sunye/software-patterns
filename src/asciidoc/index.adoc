@@ -31,7 +31,6 @@ image::https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Lice
 
 == Contents (1/2)
 
-
 .Essential patterns:
 * link:composite.html[Composite]
 * link:strategy.html[Strategy]
@@ -53,6 +52,8 @@ image::https://i.creativecommons.org/l/by-nc/4.0/88x31.png[Creative Commons Lice
 * link:adapter.html[Adapter]
 * link:decorator.html[Decorator]
 * link:dto.html[DTO]
+* link:observer.html[Observer]
+* link:abstract-factory.html[Abstract Factory]
 
 .Concurrency Patterns:
 * link:reactor.html[Reactor]

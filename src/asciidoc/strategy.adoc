@@ -24,8 +24,9 @@ Gamma et al. 95
 
 == Context
 
-* Use the strategy pattern when:
-* there are many related classes that differ only on their behavior. Strategy provides means to configure a class with different behaviors.
+.Use the strategy pattern when:
+* there are many related classes that differ only on their behavior. 
+Strategy provides means to configure a class with different behaviors.
 * you need different variants of an algorithm.
 * an algorithm uses properties that clients should not access.
 * a class defines many behaviors, which appear as multiple conditional statements in its operations.
@@ -53,25 +54,24 @@ image::strategy-example.png[align=center]
 
 image::strategy-structure.png[align=center]
 
-* Strategy defines an interface for a family of algorithms.
-* Each concrete strategy implements a different algorithm
-* The context defines the current algorithm and provides property access to algorithms.
+* _Strategy_ defines an interface for a family of algorithms.
+* Each _Concrete Strategy_ implements a different algorithm
+* The _Context_ defines the current algorithm and provides property access to algorithms.
 
 == Consequences
 
-* Hierarchies of Strategy classes define a family of algorithms or behaviors for contexts to reuse.
+* Hierarchies of _Strategy_ classes define a family of algorithms or behaviors for contexts to reuse.
 * Provides an alternative to subclassing.
 * Eliminates the use of conditional statements
 * Provides different implementations of the same behavior.
 * A client must understand how Strategies differ before it can select the appropriate one.
-* Communication overhead between Strategy and Context.
+* Communication overhead between _Strategy_ and _Context_.
 * Object proliferation.
-
 
 == Implementation Tradeoffs
 
 .Defining the Strategy and Context interfaces
-* The Strategy and Context interfaces must give a ConcreteStrategy efficient access to any data it needs from a context, and vice versa.
+* The _Strategy_ and _Context_ interfaces must give a _Concrete Strategy_ efficient access to any data it needs from a context, and vice versa.
 
 .Strategies as template parameters
 * In C++ templates can be used to configure a class with a strategy.
