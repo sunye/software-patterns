@@ -1,0 +1,71 @@
+:revealjs_center: false
+:revealjs_display: flex
+:revealjs_transition: none
+:revealjs_slideNumber: c/t
+:revealjs_theme: stereopticon
+:revealjs_width: 1920
+:revealjs_height: 1080
+:revealjs_history: true
+:revealjs_margin: 0
+:source-highlighter: highlightjs
+:imagesdir: images
+:includedir: includes
+:sectids!:
+
+= Médiateur
+
+Gamma et al. 95
+
+== Objectif
+
+* Définir un objet qui encapsule l’interaction entre un ensemble d’objets.
+* Réduire le couplage entre objets, en évitant les références explicites.
+
+== Motivation (1/4)
+
+* La conception à objets induit à la création de plusieurs petits objets réutilisables.
+* Cependant, s’il existe une dépendance forte entre ces objets, ils seront difficilement réutilisables.
+* Exemple: un boîte de dialogues est difficilement réutilisable en raison des dépendances entre éléments graphiques.
+
+== Motivation (2/4)
+
+[.columns]
+--
+[.col-6]
+image::mediator-font-chooser.png[align=center,width=600px]
+
+[.col-6]
+image::mediator-instances.png[align=center,width=600px]
+--
+
+== Motivation (3/4)
+
+image::mediator-sd.png[align=center]
+
+== Motivation (4/4)
+
+image::mediator-example.png[align=center]
+
+== Applicabilité
+
+.Utiliser un médiateur quand:
+* un ensemble d’objets doit communiquer, d’une manière bien définie, mais complexe.
+* le réutilisation d’un objet est difficile car il fait référence et communique avec beaucoup d’objets.
+* le comportement répartie par plusieurs classes doit être adaptable.
+
+== Structure 
+
+image::mediator-structure.png[align=center,width=800px]
+
+== Conséquences
+
+* Le changement du comportement de différents objets s’effectue sur le médiateur
+* Le couplage entre collègues est réduit
+* Le protocole d’interactions est simplifié
+* La coopération entre objets est réifiée
+* Le contrôle est centralisé
+
+== Compromis d’implémentation
+
+* Médiateur abstrait
+* La communication entre les collègues et le médiateur peut être réalisée par un observateur

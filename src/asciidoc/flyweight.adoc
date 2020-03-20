@@ -54,6 +54,19 @@ image::flyweight-structure.png[align=center,width=1000px]
 * Elles lui seront passées en paramètres (étatExtrinsèque)
 * *PoidsMoucheConcretNonPartagé* : cas spécial de poids-mouche qui n'externalise pas ses données
 
+== Exemple: Integer.java
+
+[source,java]
+--
+    public static Integer valueOf(int i) {
+        if (i >= IntegerCache.low && i <= IntegerCache.high)
+            return IntegerCache.cache[i + (-IntegerCache.low)];
+        return new Integer(i);
+    }
+--
+
+See: https://hg.openjdk.java.net/jdk/jdk/file/1608514a4ce7/src/java.base/share/classes/java/lang/Integer.java[OpenJDK]
+
 == Exemple
 
 image::flyweight-example.png[align=center,width=800px]
