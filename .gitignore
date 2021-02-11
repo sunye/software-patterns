@@ -6,3 +6,9 @@ dist
 .vscode/settings.json
 target/
 .idea/
+*.aux
+*.synctex.gz
+*.log
+*.lb
+*.fls
+*.fdb_latexmk

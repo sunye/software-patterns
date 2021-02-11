@@ -1,17 +1,4 @@
-:revealjs_center: false
-:revealjs_display: flex
-:revealjs_transition: none
-:revealjs_slideNumber: c/t
-:revealjs_theme: stereopticon
-:revealjs_width: 1920
-:revealjs_height: 1080
-:revealjs_history: true
-:revealjs_margin: 0
-:source-highlighter: highlightjs
-:imagesdir: images
-:includedir: includes
-:sectids!:
-
+include::../common/commons.adoc[]
 = Abstract Factory
 
 Gamma et al. 95
@@ -34,16 +21,18 @@ Gamma et al. 95
 image::abstract-factory-example.png[align=center,width=1200px]
 
 
-== Applicability
+== Applicability (1/2)
 
 * Use an abstract factory when:
-* A system must be independent of how its products are created, composed and represented
-* A system must choose one of several product families
-'''
+** A system must be independent of how its products are created, composed and represented
+** A system must choose one of several product families
+
+== Applicability (2/2)
+
 * Use an abstract factory when:
-* The objects of a family must be used together, and we want to reinforce this constraint.
-* We want to propose a library of products, without showing their implementation
-'''
+** The objects of a family must be used together, and we want to reinforce this constraint.
+** We want to propose a library of products, without showing their implementation
+
 
 == Structure
 
