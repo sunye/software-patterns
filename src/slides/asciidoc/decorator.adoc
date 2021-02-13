@@ -20,6 +20,7 @@ Decorators provide a flexible alternative to subclassing for extending functiona
 
 image::decorator-example.png[align=center]
 
+[center]
 [.small]
 Gamma'95
 
@@ -111,7 +112,7 @@ image::starbuzz-decorator.png[align=center]
 
 [Bates et al. 2009]
 
-== Java I/O
+== Decorators in the Java I/O package
 
 image::java-input-stream.png[align=center]
 
@@ -141,17 +142,79 @@ public class FilterInputStream extends InputStream {
 	//(...)
 ----
 
-== Java Collections Framework
+== Decorators in the Java Collections Framework
 
-image::java-list.png[align=center]
+.Java Collections Framework
+[plantuml, align=center]
+....
+interface "«interface»\nCollection" as List
+note right: Component
+class UnmodifiableCollection
+note bottom: Decorator
+class ArrayList
+note bottom: ConcreteComponent
+class LikedList
+note bottom: ConcreteComponent
+class SynchronizedCollection
+note bottom : Decorator
 
+List "[1]" --* UnmodifiableCollection
+List <|-- UnmodifiableCollection
+List <|-- ArrayList
+List <|-- LikedList
+List <|-- SynchronizedCollection
+List "[1]" --*  SynchronizedCollection
+
+....
+
+== Decorator Usage
+
+.Decorator Creation
+[.font-size-84]
 [source,java]
 ----
-List<String> tags = new ArrayList();
-List<String> synchronizedTags = Collections.synchronizedList(tags);
-List<String> readOnlyTags = Collections.unmodifiableList(tags);
-
+Collection<String> tags = new ArrayList();
+Collection<String> synchronizedTags = Collections.synchronizedCollection(tags);
+Collection<String> readOnlyTags = Collections.unmodifiableCollection(tags);
 ----
+
+{empty} +
+{empty}
+
+.Factory Method Implementation (JDK 15)
+[.font-size-84]
+[source, java]
+----
+public static <T> Collection<T> synchronizedCollection(Collection<T> c) {
+    return new SynchronizedCollection<>(c);
+}
+----
+
+== Java «SynchronizedCollection»
+
+.Implementation (JDK 15)
+[source, java]
+----
+static class SynchronizedCollection<E> implements Collection<E>, Serializable {
+    final Collection<E> c;  // Backing Collection
+    final Object mutex;     // Object on which to synchronize
+
+    SynchronizedCollection(Collection<E> c) {
+        this.c = Objects.requireNonNull(c);
+        mutex = this;
+    }
+
+    public int size() {
+        synchronized (mutex) {return c.size();}
+    }
+    public boolean isEmpty() {
+        synchronized (mutex) {return c.isEmpty();}
+    }
+    // (...)
+}
+----
+[.small]
+https://github.com/openjdk/jdk15/tree/master/src/java.base/share/classes/java/util
 
 [.impact]
 == link:../..[Back to main presentation]
